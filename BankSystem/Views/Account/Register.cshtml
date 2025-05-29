@@ -1,27 +1,26 @@
-﻿@model BankSystem.Data.Customer
+﻿@model BankSystem.Data.Customer // يحدد الموديل المستخدم في الصفحة
 @{
-    ViewData["Title"] = "Register";
-    Layout = null;
+    ViewData["Title"] = "Register"; // يحدد عنوان الصفحة
+    Layout = null; // لا يستخدم أي Layout خارجي
 }
 
-
-
-
 <!DOCTYPE html>
+ <!-- يحدد نوع المستند HTML5 -->
 <html lang="en">
+ <!-- يحدد لغة الصفحة بالإنجليزية -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Your Account</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8"> <!-- يحدد ترميز الحروف UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- يجعل الصفحة متجاوبة مع الشاشات -->
+    <title>Create Your Account</title> <!-- عنوان الصفحة في التبويب -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"> <!-- استيراد مكتبة الأيقونات -->
     <style>
-        * {
+        * { /* يضبط جميع العناصر لإزالة الهوامش والحشو ويجعل الصندوق يشمل الحواف */
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
+        body { /* يضبط خصائص جسم الصفحة: الخط، الخلفية، التوسيط */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #003366 100%);
             min-height: 100vh;
@@ -31,14 +30,14 @@
             align-items: center;
         }
 
-        .main-container {
+        .main-container { /* يحدد عرض الحاوية الرئيسية وتوسيطها */
             width: 100%;
             max-width: 900px;
             margin: 0 auto;
             padding: 0 1rem;
         }
 
-        .form-card {
+        .form-card { /* يحدد شكل بطاقة النموذج */
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: 24px;
@@ -49,7 +48,7 @@
             transition: all 0.3s ease;
         }
 
-            .form-card::before {
+            .form-card::before { /* شريط متحرك أعلى البطاقة */
                 content: '';
                 position: absolute;
                 top: 0;
@@ -61,8 +60,7 @@
                 animation: gradientShift 3s ease-in-out infinite;
             }
 
-
-        .form-title {
+        .form-title { /* عنوان النموذج الرئيسي */
             text-align: center;
             color: #003366;
             font-size: 2.5rem;
@@ -71,7 +69,7 @@
             position: relative;
         }
 
-            .form-title::after {
+            .form-title::after { /* خط أسفل العنوان */
                 content: '';
                 position: absolute;
                 bottom: -10px;
@@ -83,7 +81,7 @@
                 border-radius: 2px;
             }
 
-        .section-card {
+        .section-card { /* شكل كل قسم في النموذج */
             background: #ffffff;
             border-radius: 16px;
             margin-bottom: 2rem;
@@ -93,12 +91,12 @@
             border: 1px solid rgba(0, 51, 102, 0.1);
         }
 
-            .section-card:hover {
+            .section-card:hover { /* تأثير عند المرور على القسم */
                 transform: translateY(-5px);
                 box-shadow: 0 15px 35px rgba(0, 51, 102, 0.15);
             }
 
-        .section-header {
+        .section-header { /* رأس كل قسم (العنوان والخلفية) */
             background: linear-gradient(135deg, #003366, #004488);
             color: white;
             padding: 1.5rem 2rem;
@@ -106,7 +104,7 @@
             overflow: hidden;
         }
 
-            .section-header::before {
+            .section-header::before { /* تأثير متحرك عند المرور على رأس القسم */
                 content: '';
                 position: absolute;
                 top: 0;
@@ -117,26 +115,26 @@
                 transition: left 0.5s ease;
             }
 
-        .section-card:hover .section-header::before {
+        .section-card:hover .section-header::before { /* تحريك التأثير عند المرور */
             left: 100%;
         }
 
-        .section-title {
+        .section-title { /* عنوان القسم */
             font-size: 1.25rem;
             font-weight: 600;
             margin: 0;
         }
 
-        .section-body {
+        .section-body { /* جسم القسم (الحشو الداخلي) */
             padding: 2rem;
         }
 
-        .form-group {
+        .form-group { /* مجموعة عناصر النموذج (label + input) */
             margin-bottom: 1.5rem;
             position: relative;
         }
 
-        .form-label {
+        .form-label { /* تنسيق عنوان الحقل */
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
@@ -144,7 +142,7 @@
             transition: color 0.3s ease;
         }
 
-        .form-control {
+        .form-control { /* تنسيق حقول الإدخال */
             width: 100%;
             padding: 1rem 1.25rem;
             border: 2px solid #e1e5e9;
@@ -155,23 +153,23 @@
             position: relative;
         }
 
-            .form-control:focus {
+            .form-control:focus { /* تأثير عند التركيز على الحقل */
                 outline: none;
                 border-color: #003366;
                 box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
                 transform: translateY(-2px);
             }
 
-            .form-control:hover {
+            .form-control:hover { /* تأثير عند المرور على الحقل */
                 border-color: #0066cc;
             }
 
-        .input-group {
+        .input-group { /* مجموعة إدخال مع رمز أو زر بجانب الحقل */
             display: flex;
             position: relative;
         }
 
-        .input-group-text {
+        .input-group-text { /* تنسيق النص بجانب الحقل (مثلاً $) */
             background: #003366;
             color: white;
             border: 2px solid #003366;
@@ -181,12 +179,12 @@
             font-weight: 600;
         }
 
-        .input-group .form-control {
+        .input-group .form-control { /* إزالة الحافة اليسرى للحقل داخل input-group */
             border-left: none;
             border-radius: 0 12px 12px 0;
         }
 
-        .btn-toggle {
+        .btn-toggle { /* زر إظهار/إخفاء كلمة المرور */
             background: #003366;
             color: white;
             border: 2px solid #003366;
@@ -197,17 +195,17 @@
             transition: all 0.3s ease;
         }
 
-            .btn-toggle:hover {
+            .btn-toggle:hover { /* تأثير عند المرور على زر إظهار/إخفاء كلمة المرور */
                 background: #0066cc;
                 border-color: #0066cc;
                 transform: scale(1.05);
             }
 
-        .password-strength {
+        .password-strength { /* تنسيق مؤشر قوة كلمة المرور */
             margin-top: 0.5rem;
         }
 
-        .progress {
+        .progress { /* شريط التقدم لقوة كلمة المرور */
             height: 6px;
             background: #e9ecef;
             border-radius: 3px;
@@ -215,18 +213,18 @@
             margin-bottom: 0.5rem;
         }
 
-        .progress-bar {
+        .progress-bar { /* شريط التقدم نفسه */
             height: 100%;
             transition: all 0.4s ease;
             border-radius: 3px;
         }
 
-        .strength-text {
+        .strength-text { /* نص قوة كلمة المرور */
             font-size: 0.875rem;
             font-weight: 500;
         }
 
-        .btn-primary {
+        .btn-primary { /* زر إنشاء الحساب الرئيسي */
             background: linear-gradient(135deg, #003366, #0066cc);
             color: white;
             border: none;
@@ -242,7 +240,7 @@
             margin-bottom: 1rem;
         }
 
-            .btn-primary::before {
+            .btn-primary::before { /* تأثير متحرك على زر الإنشاء عند المرور */
                 content: '';
                 position: absolute;
                 top: 0;
@@ -253,16 +251,16 @@
                 transition: left 0.5s ease;
             }
 
-            .btn-primary:hover {
+            .btn-primary:hover { /* تأثير عند المرور على زر الإنشاء */
                 transform: translateY(-3px);
                 box-shadow: 0 10px 25px rgba(0, 51, 102, 0.3);
             }
 
-                .btn-primary:hover::before {
+                .btn-primary:hover::before { /* تحريك التأثير عند المرور */
                     left: 100%;
                 }
 
-        .btn-secondary {
+        .btn-secondary { /* زر ثانوي (مثلاً تسجيل الدخول) */
             background: transparent;
             color: #003366;
             border: 2px solid #003366;
@@ -278,14 +276,14 @@
             width: 100%;
         }
 
-            .btn-secondary:hover {
+            .btn-secondary:hover { /* تأثير عند المرور على الزر الثانوي */
                 background: #003366;
                 color: white;
                 transform: translateY(-2px);
                 box-shadow: 0 8px 20px rgba(0, 51, 102, 0.2);
             }
 
-        .error-message {
+        .error-message { /* تنسيق رسائل الخطأ */
             color: #dc3545;
             font-size: 0.875rem;
             margin-top: 0.5rem;
@@ -293,19 +291,18 @@
             animation: fadeIn 0.3s ease;
         }
 
-
-        .row {
+        .row { /* صف من الأعمدة (للتقسيم) */
             display: flex;
             gap: 1.5rem;
             flex-wrap: wrap;
         }
 
-        .col-md-6 {
+        .col-md-6 { /* عمود بعرض 50% تقريبا */
             flex: 1;
             min-width: 250px;
         }
 
-        .alert {
+        .alert { /* تنسيق رسائل التنبيه (مثلاً الخطأ) */
             background: #f8d7da;
             border: 1px solid #f5c6cb;
             color: #721c24;
@@ -314,7 +311,7 @@
             margin-bottom: 1.5rem;
         }
 
-        .floating-elements {
+        .floating-elements { /* حاوية للعناصر العائمة الزخرفية */
             position: absolute;
             top: 0;
             left: 0;
@@ -324,14 +321,14 @@
             overflow: hidden;
         }
 
-        .floating-element {
+        .floating-element { /* عنصر عائم زخرفي */
             position: absolute;
             background: rgba(0, 51, 102, 0.1);
             border-radius: 50%;
             animation: float 6s ease-in-out infinite;
         }
 
-            .floating-element:nth-child(1) {
+            .floating-element:nth-child(1) { /* العنصر الأول: حجمه ومكانه وزمنه */
                 width: 80px;
                 height: 80px;
                 top: 10%;
@@ -339,7 +336,7 @@
                 animation-delay: 0s;
             }
 
-            .floating-element:nth-child(2) {
+            .floating-element:nth-child(2) { /* العنصر الثاني: حجمه ومكانه وزمنه */
                 width: 60px;
                 height: 60px;
                 top: 20%;
@@ -347,7 +344,7 @@
                 animation-delay: 2s;
             }
 
-            .floating-element:nth-child(3) {
+            .floating-element:nth-child(3) { /* العنصر الثالث: حجمه ومكانه وزمنه */
                 width: 100px;
                 height: 100px;
                 bottom: 15%;
@@ -355,240 +352,249 @@
                 animation-delay: 4s;
             }
 
-       </style>
+    </style>
 </head>
 <body>
 
-
-    @if (!ViewData.ModelState.IsValid)
-
+    @if (!ViewData.ModelState.IsValid) // يتحقق إذا كان هناك أخطاء في النموذج
     {
         <div class="alert alert-danger">
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <!-- رسالة خطأ تظهر إذا كان هناك خطأ -->
+            <div asp-validation-summary="All" class="text-danger"></div> <!-- ملخص الأخطاء -->
         </div>
-    } 
+    }
 
     <div class="floating-elements">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
+        <!-- عناصر زخرفية عائمة -->
+        <div class="floating-element"></div> <!-- عنصر عائم 1 -->
+        <div class="floating-element"></div> <!-- عنصر عائم 2 -->
+        <div class="floating-element"></div> <!-- عنصر عائم 3 -->
     </div>
 
     <div class="main-container">
+        <!-- الحاوية الرئيسية للنموذج -->
         <div class="form-card">
+            <!-- بطاقة النموذج -->
             <h1 class="form-title">
-                <i class="fas fa-user-plus"></i> Create Your Account
+                <i class="fas fa-user-plus"></i> <!-- أيقونة إضافة مستخدم -->
+                Create Your Account <!-- نص العنوان -->
             </h1>
 
             <div id="errorAlert" class="alert" style="display: none;">
-                <div id="errorList"></div>
+                <!-- رسالة خطأ مخفية -->
+                <div id="errorList"></div> <!-- قائمة الأخطاء -->
             </div>
 
-             <form asp-action="Register" method="post" onsubmit="return validatePasswordMatch()">
-
-
+            <form asp-action="Register" method="post" onsubmit="return validatePasswordMatch()">
+                <!-- نموذج التسجيل -->
                 <!-- Personal Information Section -->
                 <div class="section-card">
+                    <!-- قسم المعلومات الشخصية -->
                     <div class="section-header">
                         <h2 class="section-title">
-                            <i class="fas fa-user"></i> Personal Information
+                            <i class="fas fa-user"></i> <!-- أيقونة مستخدم -->
+                            Personal Information <!-- عنوان القسم -->
                         </h2>
                     </div>
                     <div class="section-body">
                         <div class="row">
+                            <!-- صف من الأعمدة -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="Name" class="form-label">Full Name</label>
-                                    <input asp-for="Name" class="form-control" placeholder="John Doe" required />
-                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                    <label asp-for="Name" class="form-label">Full Name</label> <!-- عنوان الحقل -->
+                                    <input asp-for="Name" class="form-control" placeholder="John Doe" required /> <!-- حقل الاسم -->
+                                    <span asp-validation-for="Name" class="text-danger"></span> <!-- رسالة خطأ الاسم -->
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="DateOfBirth" class="form-label">Date of Birth</label>
-                                    <input asp-for="DateOfBirth" class="form-control" type="date" required />
-                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                    <label asp-for="DateOfBirth" class="form-label">Date of Birth</label> <!-- عنوان الحقل -->
+                                    <input asp-for="DateOfBirth" class="form-control" type="date" required /> <!-- حقل تاريخ الميلاد -->
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span> <!-- رسالة خطأ تاريخ الميلاد -->
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <label asp-for="Email" class="form-label">Email Address</label>
-                                <input asp-for="Email" class="form-control" type="email" placeholder="you@example.com" required />
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                                </div>
+                                <label asp-for="Email" class="form-label">Email Address</label> <!-- عنوان البريد -->
+                                <input asp-for="Email" class="form-control" type="email" placeholder="you@example.com" required /> <!-- حقل البريد -->
+                                <span asp-validation-for="Email" class="text-danger"></span> <!-- رسالة خطأ البريد -->
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
-                                <input asp-for="PhoneNumber" class="form-control" placeholder="123-456-7890" required />
-                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber" class="form-label">Phone Number</label> <!-- عنوان الهاتف -->
+                                <input asp-for="PhoneNumber" class="form-control" placeholder="123-456-7890" required /> <!-- حقل الهاتف -->
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span> <!-- رسالة خطأ الهاتف -->
                             </div>
                         </div>
 
                         <div class="form-group">
-                    <label asp-for="Address" class="form-label">Address</label>
-                    <textarea asp-for="Address" class="form-control" rows="2" placeholder="123 Main St, City, State, ZIP" required></textarea>
-                    <span asp-validation-for="Address" class="text-danger"></span>
+                            <label asp-for="Address" class="form-label">Address</label> <!-- عنوان العنوان -->
+                            <textarea asp-for="Address" class="form-control" rows="2" placeholder="123 Main St, City, State, ZIP" required></textarea> <!-- حقل العنوان -->
+                            <span asp-validation-for="Address" class="text-danger"></span> <!-- رسالة خطأ العنوان -->
                         </div>
                     </div>
-                
+                </div>
 
                 <!-- Financial Information Section -->
                 <div class="section-card">
+                    <!-- قسم المعلومات المالية -->
                     <div class="section-header">
                         <h2 class="section-title">
-                            <i class="fas fa-dollar-sign"></i> Financial Information
+                            <i class="fas fa-dollar-sign"></i> <!-- أيقونة دولار -->
+                            Financial Information <!-- عنوان القسم -->
                         </h2>
                     </div>
                     <div class="section-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                            <label asp-for="SSN" class="form-label">Social Security Number</label>
-                            <input asp-for="SSN" class="form-control" placeholder="XXX-XX-XXXX" />
-                            <span asp-validation-for="SSN" class="text-danger"></span>
+                                    <label asp-for="SSN" class="form-label">Social Security Number</label> <!-- عنوان SSN -->
+                                    <input asp-for="SSN" class="form-control" placeholder="XXX-XX-XXXX" /> <!-- حقل SSN -->
+                                    <span asp-validation-for="SSN" class="text-danger"></span> <!-- رسالة خطأ SSN -->
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                            <label asp-for="Occupation" class="form-label">Occupation</label>
-                            <input asp-for="Occupation" class="form-control" placeholder="Software Engineer" />
-                            <span asp-validation-for="Occupation" class="text-danger"></span>
+                                    <label asp-for="Occupation" class="form-label">Occupation</label> <!-- عنوان الوظيفة -->
+                                    <input asp-for="Occupation" class="form-control" placeholder="Software Engineer" /> <!-- حقل الوظيفة -->
+                                    <span asp-validation-for="Occupation" class="text-danger"></span> <!-- رسالة خطأ الوظيفة -->
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                    <label asp-for="AnnualIncome" class="form-label">Annual Income</label>
-                    <div class="input-group">
-                        <span class="input-group-text">$</span>
-                        <input asp-for="AnnualIncome" class="form-control" placeholder="50000" />
-                    </div>
-                    <span asp-validation-for="AnnualIncome" class="text-danger"></span>
+                            <label asp-for="AnnualIncome" class="form-label">Annual Income</label> <!-- عنوان الدخل السنوي -->
+                            <div class="input-group">
+                                <span class="input-group-text">$</span> <!-- رمز الدولار -->
+                                <input asp-for="AnnualIncome" class="form-control" placeholder="50000" /> <!-- حقل الدخل السنوي -->
+                            </div>
+                            <span asp-validation-for="AnnualIncome" class="text-danger"></span> <!-- رسالة خطأ الدخل السنوي -->
                         </div>
                     </div>
                 </div>
 
                 <!-- Account Credentials Section -->
                 <div class="section-card">
+                    <!-- قسم بيانات الحساب -->
                     <div class="section-header">
                         <h2 class="section-title">
-                            <i class="fas fa-key"></i> Account Credentials
+                            <i class="fas fa-key"></i> <!-- أيقونة مفتاح -->
+                            Account Credentials <!-- عنوان القسم -->
                         </h2>
                     </div>
                     <div class="section-body">
                         <div class="form-group">
-                    <label asp-for="Username" class="form-label">Username</label>
-                    <input asp-for="Username" class="form-control" placeholder="johndoe123" required />
-                    <span asp-validation-for="Username" class="text-danger"></span>
+                            <label asp-for="Username" class="form-label">Username</label> <!-- عنوان اسم المستخدم -->
+                            <input asp-for="Username" class="form-control" placeholder="johndoe123" required /> <!-- حقل اسم المستخدم -->
+                            <span asp-validation-for="Username" class="text-danger"></span> <!-- رسالة خطأ اسم المستخدم -->
                         </div>
 
                         <div class="form-group">
-                    <label asp-for="Password" class="form-label">Password</label>
-                    <div class="input-group">
-                        <input asp-for="Password" type="password" class="form-control" id="password" placeholder="••••••••" required oninput="checkPasswordStrength()" />
-                        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')">👁</button>
-                    </div>
-                    <div class="progress mt-2" style="height: 5px;">
-                        <div id="passwordStrengthBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                    </div>
-                    <small id="passwordStrengthText" class="text-muted"></small>
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                            <label asp-for="Password" class="form-label">Password</label> <!-- عنوان كلمة المرور -->
+                            <div class="input-group">
+                                <input asp-for="Password" type="password" class="form-control" id="password" placeholder="••••••••" required oninput="checkPasswordStrength()" /> <!-- حقل كلمة المرور مع فحص القوة -->
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')">👁</button> <!-- زر إظهار/إخفاء كلمة المرور -->
+                            </div>
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div id="passwordStrengthBar" class="progress-bar" role="progressbar" style="width: 0%"></div> <!-- شريط قوة كلمة المرور -->
+                            </div>
+                            <small id="passwordStrengthText" class="text-muted"></small> <!-- نص قوة كلمة المرور -->
+                            <span asp-validation-for="Password" class="text-danger"></span> <!-- رسالة خطأ كلمة المرور -->
                         </div>
 
                         <div class="form-group">
-                    <label class="form-label">Confirm Password</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••" required />
-                        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('confirmPassword')">👁</button>
-                    </div>
-                    <span id="passwordError" class="text-danger" style="display:none;">Passwords do not match.</span>
+                            <label class="form-label">Confirm Password</label> <!-- عنوان تأكيد كلمة المرور -->
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••" required /> <!-- حقل تأكيد كلمة المرور -->
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('confirmPassword')">👁</button> <!-- زر إظهار/إخفاء التأكيد -->
+                            </div>
+                            <span id="passwordError" class="text-danger" style="display:none;">Passwords do not match.</span> <!-- رسالة خطأ عدم تطابق كلمة المرور -->
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <button type="submit" class="btn-primary">
-                        <i class="fas fa-user-plus"></i> Create Account
+                        <i class="fas fa-user-plus"></i> <!-- أيقونة إضافة مستخدم -->
+                        Create Account <!-- نص الزر -->
                     </button>
-            <a asp-action="Login" class="btn btn-outline-secondary">Already have an account? Sign In</a>
-
+                    <a asp-action="Login" class="btn btn-outline-secondary">Already have an account? Sign In</a> <!-- زر تسجيل الدخول -->
                 </div>
-    
-             </form>
+
+            </form>
         </div>
     </div>
 
     <script>
-        function togglePassword(id) {
-            const input = document.getElementById(id);
-            const icon = input.nextElementSibling.querySelector('i');
+        function togglePassword(id) { // دالة لإظهار أو إخفاء كلمة المرور
+            const input = document.getElementById(id); // يحصل على الحقل
+            const icon = input.nextElementSibling.querySelector('i'); // يحصل على الأيقونة (غير موجودة هنا فعليًا)
 
-            if (input.type === "password") {
-                input.type = "text";
-                icon.classList.remove('fa-eye');
+            if (input.type === "password") { // إذا كان الحقل مخفي
+                input.type = "text"; // أظهر كلمة المرور
+                icon.classList.remove('fa-eye'); // غير الأيقونة (لن تعمل هنا لأن الزر نص فقط)
                 icon.classList.add('fa-eye-slash');
             } else {
-                input.type = "password";
+                input.type = "password"; // أخف كلمة المرور
                 icon.classList.remove('fa-eye-slash');
                 icon.classList.add('fa-eye');
             }
         }
 
-        function validatePasswordMatch() {
-            const password = document.getElementById("password").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
-            const error = document.getElementById("confirmPasswordError");
+        function validatePasswordMatch() { // دالة للتحقق من تطابق كلمتي المرور
+            const password = document.getElementById("password").value; // يحصل على كلمة المرور
+            const confirmPassword = document.getElementById("confirmPassword").value; // يحصل على التأكيد
+            const error = document.getElementById("confirmPasswordError"); // يحصل على عنصر الخطأ (غير موجود فعليًا)
 
-            if (confirmPassword && password !== confirmPassword) {
-                error.textContent = "Passwords do not match.";
+            if (confirmPassword && password !== confirmPassword) { // إذا لم تتطابق الكلمتان
+                error.textContent = "Passwords do not match."; // أظهر رسالة الخطأ
                 error.style.display = "block";
-                return false;
+                return false; // أوقف الإرسال
             } else {
-                error.style.display = "none";
-                return true;
+                error.style.display = "none"; // أخفِ رسالة الخطأ
+                return true; // أكمل الإرسال
             }
         }
 
-        function checkPasswordStrength() {
-            const password = document.getElementById("password").value;
-            const bar = document.getElementById("passwordStrengthBar");
-            const text = document.getElementById("passwordStrengthText");
+        function checkPasswordStrength() { // دالة لفحص قوة كلمة المرور
+            const password = document.getElementById("password").value; // يحصل على كلمة المرور
+            const bar = document.getElementById("passwordStrengthBar"); // يحصل على شريط القوة
+            const text = document.getElementById("passwordStrengthText"); // يحصل على نص القوة
 
-            let strength = 0;
-            let feedback = [];
+            let strength = 0; // متغير لقوة الكلمة
+            let feedback = []; // مصفوفة للملاحظات
 
-            if (password.length >= 8) {
+            if (password.length >= 8) { // إذا الطول 8 أو أكثر
                 strength += 1;
             } else {
                 feedback.push("At least 8 characters");
             }
 
-            if (/[A-Z]/.test(password)) {
+            if (/[A-Z]/.test(password)) { // إذا فيها حرف كبير
                 strength += 1;
             } else {
                 feedback.push("Uppercase letter");
             }
 
-            if (/[0-9]/.test(password)) {
+            if (/[0-9]/.test(password)) { // إذا فيها رقم
                 strength += 1;
             } else {
                 feedback.push("Number");
             }
 
-            if (/[\W_]/.test(password)) {
+            if (/[\W_]/.test(password)) { // إذا فيها رمز خاص
                 strength += 1;
             } else {
                 feedback.push("Special character");
             }
 
-            let barWidth = strength * 25;
-            let color, label;
+            let barWidth = strength * 25; // عرض الشريط حسب القوة
+            let color, label; // متغيرات اللون والنص
 
-            switch (strength) {
+            switch (strength) { // يحدد اللون والنص حسب القوة
                 case 0:
                 case 1:
                     color = "#dc3545";
@@ -608,269 +614,67 @@
                     break;
             }
 
-            bar.style.backgroundColor = color;
-            bar.style.width = barWidth + '%';
-            text.textContent = label;
-            text.style.color = color;
+            bar.style.backgroundColor = color; // يغير لون الشريط
+            bar.style.width = barWidth + '%'; // يغير عرض الشريط
+            text.textContent = label; // يغير نص القوة
+            text.style.color = color; // يغير لون النص
 
-            if (feedback.length > 0 && password.length > 0) {
-                text.textContent += ` (Need: ${feedback.join(', ')})`;
+            if (feedback.length > 0 && password.length > 0) { // إذا هناك ملاحظات
+                text.textContent += ` (Need: ${feedback.join(', ')})`; // أضف الملاحظات للنص
             }
         }
 
-        function validateForm(event) {
-            event.preventDefault();
+        function validateForm(event) { // دالة للتحقق من صحة النموذج قبل الإرسال
+            event.preventDefault(); // يمنع الإرسال الافتراضي
 
-            let isValid = true;
-            const password = document.getElementById("password").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
+            let isValid = true; // متغير للصحة
+            const password = document.getElementById("password").value; // يحصل على كلمة المرور
+            const confirmPassword = document.getElementById("confirmPassword").value; // يحصل على التأكيد
 
-            // Clear previous errors
-            document.querySelectorAll('.error-message').forEach(error => {
+            document.querySelectorAll('.error-message').forEach(error => { // يخفي كل رسائل الخطأ السابقة
                 error.style.display = 'none';
             });
 
-            // Validate password match
-            if (password !== confirmPassword) {
+            if (password !== confirmPassword) { // إذا لم تتطابق كلمتا المرور
                 document.getElementById("confirmPasswordError").textContent = "Passwords do not match.";
                 document.getElementById("confirmPasswordError").style.display = "block";
                 isValid = false;
             }
 
-            // Validate password strength
-            if (password.length < 8) {
+            if (password.length < 8) { // إذا كلمة المرور قصيرة
                 document.getElementById("passwordError").textContent = "Password must be at least 8 characters long.";
                 document.getElementById("passwordError").style.display = "block";
                 isValid = false;
             }
 
-            if (isValid) {
-                // Simulate form submission
-                const submitBtn = document.querySelector('.btn-primary');
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
-                submitBtn.style.background = '#28a745';
+            if (isValid) { // إذا كل شيء صحيح
+                const submitBtn = document.querySelector('.btn-primary'); // يحصل على زر الإرسال
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...'; // يغير نص الزر
+                submitBtn.style.background = '#28a745'; // يغير لون الزر
 
-                setTimeout(() => {
-                    alert('Account created successfully!');
-                    submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
-                    submitBtn.style.background = '';
+                setTimeout(() => { // بعد ثانيتين
+                    alert('Account created successfully!'); // يظهر رسالة نجاح
+                    submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account'; // يرجع نص الزر
+                    submitBtn.style.background = ''; // يرجع لون الزر
                 }, 2000);
             }
 
-            return isValid;
+            return isValid; // يرجع إذا كان النموذج صحيح أم لا
         }
 
-        // Add form animation on load
-        window.addEventListener('load', () => {
-            document.querySelector('.form-card').style.animation = 'fadeIn 0.8s ease-out';
+        window.addEventListener('load', () => { // عند تحميل الصفحة
+            document.querySelector('.form-card').style.animation = 'fadeIn 0.8s ease-out'; // أضف حركة للبطاقة
         });
 
-        // Add input focus animations
-        document.querySelectorAll('.form-control').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'scale(1.02)';
+        document.querySelectorAll('.form-control').forEach(input => { // لكل حقل إدخال
+            input.addEventListener('focus', function() { // عند التركيز
+                this.parentElement.style.transform = 'scale(1.02)'; // كبر الحاوية قليلاً
             });
 
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'scale(1)';
+            input.addEventListener('blur', function() { // عند فقدان التركيز
+                this.parentElement.style.transform = 'scale(1)'; // أعد الحجم الطبيعي
             });
         });
     </script>
 </body>
 </html>
-
-
-
-
-@* <div class="d-flex justify-content-center align-items-center bg-light" style="min-height: 100vh; padding: 2rem 0;">
-    <div class="card shadow p-4" style="width: 800px; max-width: 95%; border-radius: 1rem;">
-        <h3 class="text-center mb-4">📝 Create Your Account</h3>
-
-        @if (!ViewData.ModelState.IsValid)
-
-        {
-            <div class="alert alert-danger">
-                <div asp-validation-summary="All" class="text-danger"></div>
-            </div>
-        }
-
-        <form asp-action="Register" method="post" onsubmit="return validatePasswordMatch()">
-            <!-- Personal Information Section -->
-            <div class="card mb-4">
-                <div class="card-header bg-light">
-                    <h5 class="mb-0">Personal Information</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="Name" class="form-label">Full Name</label>
-                            <input asp-for="Name" class="form-control" placeholder="John Doe" required />
-                            <span asp-validation-for="Name" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="DateOfBirth" class="form-label">Date of Birth</label>
-                            <input asp-for="DateOfBirth" class="form-control" type="date" required />
-                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="Email" class="form-label">Email Address</label>
-                            <input asp-for="Email" class="form-control" type="email" placeholder="you@example.com" required />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
-                            <input asp-for="PhoneNumber" class="form-control" placeholder="123-456-7890" required />
-                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="Address" class="form-label">Address</label>
-                        <textarea asp-for="Address" class="form-control" rows="2" placeholder="123 Main St, City, State, ZIP" required></textarea>
-                        <span asp-validation-for="Address" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Financial Information Section -->
-            <div class="card mb-4">
-                <div class="card-header bg-light">
-                    <h5 class="mb-0">Financial Information</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="SSN" class="form-label">Social Security Number</label>
-                            <input asp-for="SSN" class="form-control" placeholder="XXX-XX-XXXX" />
-                            <span asp-validation-for="SSN" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label asp-for="Occupation" class="form-label">Occupation</label>
-                            <input asp-for="Occupation" class="form-control" placeholder="Software Engineer" />
-                            <span asp-validation-for="Occupation" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="AnnualIncome" class="form-label">Annual Income</label>
-                        <div class="input-group">
-                            <span class="input-group-text">$</span>
-                            <input asp-for="AnnualIncome" class="form-control" placeholder="50000" />
-                        </div>
-                        <span asp-validation-for="AnnualIncome" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Account Credentials Section -->
-            <div class="card mb-4">
-                <div class="card-header bg-light">
-                    <h5 class="mb-0">Account Credentials</h5>
-                </div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label asp-for="Username" class="form-label">Username</label>
-                        <input asp-for="Username" class="form-control" placeholder="johndoe123" required />
-                        <span asp-validation-for="Username" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label asp-for="Password" class="form-label">Password</label>
-                        <div class="input-group">
-                            <input asp-for="Password" type="password" class="form-control" id="password" placeholder="••••••••" required oninput="checkPasswordStrength()" />
-                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')">👁</button>
-                        </div>
-                        <div class="progress mt-2" style="height: 5px;">
-                            <div id="passwordStrengthBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                        </div>
-                        <small id="passwordStrengthText" class="text-muted"></small>
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Confirm Password</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••" required />
-                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('confirmPassword')">👁</button>
-                        </div>
-                        <span id="passwordError" class="text-danger" style="display:none;">Passwords do not match.</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-success">Create Account</button>
-                <a asp-action="Login" class="btn btn-outline-secondary">Already have an account? Sign In</a>
-            </div>
-        </form>
-    </div>
-</div>
-
-@section Scripts {
-    <script>
-        function togglePassword(id) {
-            const input = document.getElementById(id);
-            input.type = input.type === "password" ? "text" : "password";
-        }
-
-        function validatePasswordMatch() {
-            const password = document.getElementById("password").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
-            const error = document.getElementById("passwordError");
-
-            if (password !== confirmPassword) {
-                error.style.display = "block";
-                return false;
-            }
-
-            error.style.display = "none";
-            return true;
-        }
-
-        function checkPasswordStrength() {
-            const password = document.getElementById("password").value;
-            const bar = document.getElementById("passwordStrengthBar");
-            const text = document.getElementById("passwordStrengthText");
-
-            let strength = 0;
-
-            if (password.length >= 8) strength += 1;
-            if (/[A-Z]/.test(password)) strength += 1;
-            if (/[0-9]/.test(password)) strength += 1;
-            if (/[\W_]/.test(password)) strength += 1;
-
-            let barWidth = strength * 25;
-            let color, label;
-
-            switch (strength) {
-                case 0:
-                    color = "bg-danger";
-                    label = "Very Weak";
-                    break;
-                case 1:
-                    color = "bg-danger";
-                    label = "Weak";
-                    break;
-                case 2:
-                    color = "bg-warning";
-                    label = "Moderate";
-                    break;
-                case 3:
-                    color = "bg-info";
-                    label = "Strong";
-                    break;
-                case 4:
-                    color = "bg-success";
-                    label = "Very Strong";
-                    break;
-            }
-
-        bar.className = `progress-bar ${color}`;
-        bar.style.width = `${barWidth}%`;
-        text.textContent = label;
-        }
-    </script>
-} *@

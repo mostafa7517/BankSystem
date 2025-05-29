@@ -1,23 +1,25 @@
-﻿@model IEnumerable<BankSystem.Data.Appointment>
+﻿@model IEnumerable<BankSystem.Data.Appointment> // الموديل هو قائمة مواعيد من نوع Appointment
 
 @{
-    ViewData["Title"] = "My Appointments";
-    Layout = null;
+    ViewData["Title"] = "My Appointments"; // اسم الصفحة سيظهر في العنوان
+    Layout = null; // الصفحة بدون Layout عام
 }
 
 <!DOCTYPE html>
+ <!-- تعريف نوع الصفحة HTML5 -->
 <html lang="en">
+ <!-- صفحة HTML باللغة الإنجليزية -->
 <head>
-    <meta charset="UTF-8" />
-    <title>@ViewData["Title"] - Nexus Bank</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" /> <!-- تعيين ترميز الأحرف -->
+    <title>@ViewData["Title"] - Nexus Bank</title> <!-- عنوان الصفحة في التبويب -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- لتكون الصفحة متجاوبة للجوال -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" /> <!-- استيراد خطوط جوجل -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
           crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
+          referrerpolicy="no-referrer" /> <!-- استيراد أيقونات FontAwesome -->
     <style>
-        :root {
+        :root { /* تعريف ألوان وثوابت CSS للاستخدام المتكرر */
             --primary: #7ea1ce;
             --secondary: #bdd7ee;
             --deep-blue: #285686;
@@ -29,7 +31,7 @@
             --danger: #dc3545;
         }
 
-        body {
+        body { /* خصائص الخط والخلفية والألوان العامة */
             font-family: 'Montserrat', Arial, sans-serif;
             margin: 0;
             background: var(--white);
@@ -37,60 +39,59 @@
             line-height: 1.5;
         }
 
-        /* Header */
+        /* --- تصميم الشريط العلوي --- */
         .navbar {
-  background-color: #003366;
- border: 3px solid #FFF2F2;
-  border-radius: 30px;
-  padding: 10px 30px;
-  margin: 20px auto;
-  width: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+            background-color: #003366;
+            border: 3px solid #FFF2F2;
+            border-radius: 30px;
+            padding: 10px 30px;
+            margin: 20px auto;
+            width: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: bold;
-  color: #fff;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            color: #fff;
+        }
 
-.logo img {
-  width: 40px;
-  height: 40px;
-    transform: scale(1.5); 
-border-radius: 50%;
-margin-left:160% ;
-}
+            .logo img { /* صورة اللوجو */
+                width: 40px;
+                height: 40px;
+                transform: scale(1.5);
+                border-radius: 50%;
+                margin-left: 160%;
+            }
 
-.logo .highlight {
-  color: #d0d0ff;
-}
+            .logo .highlight {
+                color: #d0d0ff;
+            }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-  margin:0;
-  padding-right:35%;
-}
+        .nav-links { /* قائمة روابط النفيجيشن */
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding-right: 35%;
+        }
 
-.nav-links a {
-  color:#ffffff;
-  cursor: pointer;
-  transition: 0.3s;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-family: "Tagesschrift", system-ui;
-  font-size:1.2rem;
-              text-decoration: none;
+            .nav-links a { /* تصميم كل عنصر قائمة */
+                color: #ffffff;
+                cursor: pointer;
+                transition: 0.3s;
+                padding: 6px 16px;
+                border-radius: 20px;
+                font-family: "Tagesschrift", system-ui;
+                font-size: 1.2rem;
+                text-decoration: none;
+            }
 
-}
-
-        /* Container */
+        /* --- الحاوية العامة --- */
         .container {
             max-width: 1080px;
             margin: 48px auto 80px auto;
@@ -98,7 +99,7 @@ margin-left:160% ;
             color: var(--text);
         }
 
-        /* Appointments Section */
+        /* --- رأس جدول المواعيد وأزراره --- */
         .appt-header {
             display: flex;
             justify-content: space-between;
@@ -107,7 +108,7 @@ margin-left:160% ;
             flex-wrap: wrap;
         }
 
-            .appt-header h2 {
+            .appt-header h2 { /* عنوان القسم */
                 font-size: 2.8rem;
                 font-weight: 700;
                 color: var(--deep-blue);
@@ -118,7 +119,7 @@ margin-left:160% ;
                 user-select: none;
             }
 
-        .btn-primary {
+        .btn-primary { /* زر إضافة موعد جديد */
             background: var(--deep-blue);
             color: #fff;
             font-weight: 700;
@@ -140,7 +141,7 @@ margin-left:160% ;
                 color: #fff;
             }
 
-        .alert-success {
+        .alert-success { /* رسالة نجاح */
             background: #d1e7dd;
             color: #0f5132;
             border-radius: 25px;
@@ -149,7 +150,7 @@ margin-left:160% ;
             font-size: 1rem;
         }
 
-        .alert-info {
+        .alert-info { /* رسالة معلومات */
             background: #cff4fc;
             color: #055160;
             border-radius: 25px;
@@ -158,7 +159,7 @@ margin-left:160% ;
             font-size: 1rem;
         }
 
-        .card-appointments {
+        .card-appointments { /* تغليف للجدول */
             background: #003366;
             border-radius: 40px;
             padding: 30px 36px;
@@ -167,7 +168,7 @@ margin-left:160% ;
             overflow-x: auto;
         }
 
-        table {
+        table { /* تصميم الجدول */
             width: 100%;
             border-collapse: collapse;
             color: var(--deep-blue);
@@ -178,7 +179,7 @@ margin-left:160% ;
             font-size: 1rem;
         }
 
-        thead tr {
+        thead tr { /* صف رأس الجدول */
             background: var(--header-bg);
             color: var(--deep-blue);
             font-weight: 700;
@@ -186,19 +187,18 @@ margin-left:160% ;
         }
 
         th,
-        td {
+        td { /* رؤوس وأعمدة الجدول */
             padding: 18px 24px;
             text-align: left;
             vertical-align: middle;
             border-bottom: 1.5px solid var(--secondary);
         }
 
-        tbody tr:hover {
-          
+        tbody tr:hover { /* تأثير على الصف عند المرور */
             cursor: pointer;
         }
 
-        .badge {
+        .badge { /* شارة الحالة */
             display: inline-block;
             padding: 6px 16px;
             border-radius: 20px;
@@ -233,7 +233,7 @@ margin-left:160% ;
             color: #fff;
         }
 
-        .btn-cancel {
+        .btn-cancel { /* زر إلغاء الموعد */
             color: var(--danger);
             background: transparent;
             border: 2px solid var(--danger);
@@ -254,7 +254,7 @@ margin-left:160% ;
                 text-decoration: none;
             }
 
-        /* Article */
+        /* --- مقال تعريفي بالبنك --- */
         .main-article {
             max-width: 1080px;
             margin: 80px auto 100px auto;
@@ -303,133 +303,8 @@ margin-left:160% ;
                 line-height: 1.6;
             }
 
-        /* Testimonials */
-        .testimonials-section {
-            max-width: 1080px;
-            margin: 0 auto 100px auto;
-            padding: 0 40px;
-            text-align: center;
-            color: var(--deep-blue);
-        }
-
-            .testimonials-section h2 {
-                font-size: 2.8rem;
-                font-weight: 700;
-                margin-bottom: 16px;
-            }
-
-        .toggle-group {
-            margin: 16px auto 32px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 2em;
-            background: #003366;
-            padding: 0.25em 0.44em;
-            max-width: 350px;
-            gap: 6px;
-        }
-
-        .toggle-btn {
-            flex: 1;
-            padding: 0.6em 2.1em;
-            border-radius: 1.3em;
-            background: var(--secondary);
-            font-size: 1.03em;
-            font-weight: 600;
-            color: #232c3a;
-            border: none;
-            margin: 0.23em 0.1em;
-            transition: background 0.16s, color 0.12s, box-shadow 0.13s;
-            cursor: pointer;
-            outline: none;
-            min-width: 140px;
-        }
-
-            .toggle-btn.inactive {
-                background: transparent;
-                color: #f3f3f3;
-                font-weight: 400;
-            }
-
-            .toggle-btn:focus,
-            .toggle-btn:hover {
-                background: var(--deep-blue);
-                color: #fff;
-                box-shadow: 0 1px 10px #bdd7ee44;
-            }
-
-        .carousel {
-            background:#003366;
-            border-radius: 55px;
-            padding: 32px 20px;
-            margin: 0 auto 40px auto;
-            display: flex;
-            align-items: center;
-            max-width: 1100px;
-            min-height: 260px;
-            position: relative;
-            box-sizing: border-box;
-            justify-content: center;
-            color: var(--deep-blue);
-        }
-
-        .carousel-cards {
-            flex: 1;
-            display: flex;
-            justify-content: space-between;
-            gap: 18px;
-            margin: 0 1em;
-            overflow-x: auto;
-            padding-bottom: 5px;
-            scrollbar-width: thin;
-        }
-
-        .carousel-card {
-            background: linear-gradient(135deg, #003366 0%, #764ba2 100%);
-            border-radius: 26px;
-            flex: 1 0 260px;
-            padding: 25px 22px 28px 22px;
-            margin: 0 8px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 167px;
-            color: var(--deep-blue);
-            font-size: 1.04rem;
-            align-items: center;
-            position: relative;
-            scroll-snap-align: center;
-        }
-
-            .carousel-card .quote {
-                font-size: 2.3em;
-                font-weight: bold;
-                color: White;
-                margin-bottom: 10px;
-                margin-top: -22px;
-                line-height: 0.6;
-            }
-
-        .card-content {
-            margin-bottom: 18px;
-            color: White;
-
-        }
-
-        .carousel-card .author {
-            font-weight: 700;
-            color: white;
-            margin-top: 14px;
-            font-size: 1.1em;
-            letter-spacing: 0.01em;
-            text-align: right;
-            width: 100%;
-        }
-
-        /* Footer */
-       .footer {
+        /* --- الفوتر موقع البنك --- */
+        .footer {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             padding: 2rem 0;
@@ -437,16 +312,16 @@ margin-left:160% ;
             overflow: hidden;
         }
 
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
+            .footer::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+                pointer-events: none;
+            }
 
         .footer-container {
             max-width: 1200px;
@@ -516,10 +391,10 @@ margin-left:160% ;
             transition: all 0.3s ease;
         }
 
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
+            .contact-item:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
 
         .contact-icon {
             width: 20px;
@@ -557,11 +432,11 @@ margin-left:160% ;
             border-radius: 6px;
             border: 1px solid transparent;
         }
-            
-            .footer-links a{
-              text-decoration: none;
-              color: #ffffff;
-            }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #ffffff;
+        }
 
         .footer-link:hover {
             background: rgba(255, 255, 255, 0.1);
@@ -575,51 +450,235 @@ margin-left:160% ;
             background: rgba(255, 255, 255, 0.3);
         }
 
-        
+        /* ----------- Testimonials Section (from Home) ----------- */
+        .testimonials-section {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .testimonials-title {
+            color: #003366;
+            font-family: "Berkshire Swash", serif;
+            font-size: 4rem;
+            position: relative;
+            display: inline-block;
+            margin-left: %;
+            margin-top: 3%;
+        }
+
+        .testimonials-subtitle {
+            font-size: 1.3rem;
+            min-width: 750px;
+            margin: 0 220px 40px;
+            color: #555;
+            font-family: "Rosarivo", cursive;
+            font-style: italic;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50px;
+            padding: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            width: 30%;
+            align-items: center;
+        }
+
+        .tab-button {
+            padding: 2px 30px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            color: #7f8c8d;
+        }
+
+            .tab-button.active {
+                background: linear-gradient(135deg, #003366 0%, #667eea 100%);
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            }
+
+        .testimonials-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonials-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: 200%;
+        }
+
+        .testimonials-group {
+            display: flex;
+            width: 50%;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .testimonial-card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+            .testimonial-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+                background: linear-gradient(135deg, #003366 0%, #667eea 100%);
+                color: #ffffff;
+            }
+
+                .testimonial-card:hover .testimonial-text {
+                    color: white;
+                }
+
+                .testimonial-card:hover .testimonial-author {
+                    color: white;
+                }
+
+                .testimonial-card:hover .quote-icon {
+                    color: rgba(255, 255, 255, 0.7);
+                }
+
+        .quote-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #34495e;
+            margin-bottom: 25px;
+            font-style: italic;
+            font-family: "Rosarivo", cursive;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-family: "Berkshire Swash", serif;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .nav-button {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+            .nav-button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            }
+
+            .nav-button:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+                transform: none;
+            }
     </style>
 </head>
 <header>
-        <nav class="navbar">
-            <div class="logo">
-             <img src="/img/nav.jpg" alt="Logo" /> 
-            </div>
-            <ul class="nav-links">
-                <a href="/Home/Index">Home</a>
-                <a href="/Home/Careers">Careers</a>
-                <a href="/Home/About">About</a>
-                <a href="/Home/Security">Security</a>
-            </ul>
-           
-        </nav>
-
-    </header>
+    <nav class="navbar">
+        <!-- الشريط العلوي للتنقل -->
+        <div class="logo">
+            <!-- الشعار -->
+            <img src="/img/nav.jpg" alt="Logo" /> <!-- صورة الشعار -->
+        </div>
+        <ul class="nav-links">
+            <!-- الروابط -->
+            <a href="/Home/Index">Home</a> <!-- الرئيسية -->
+            <a href="/Home/Careers">Careers</a> <!-- وظائف -->
+            <a href="/Home/About">About</a> <!-- من نحن -->
+            <a href="/Home/Security">Security</a> <!-- الحماية -->
+        </ul>
+    </nav>
+</header>
 <body>
-   
-
     <!-- Appointments Section -->
     <main class="container" role="main">
+        <!-- الحاوية الرئيسية -->
         <section aria-label="My Appointments">
+            <!-- قسم جدول المواعيد -->
             <div class="appt-header">
-                <h2><i class="fa-regular fa-calendar" style="margin-right:6px;"></i>My Appointments</h2>
+                <!-- رأس الجدول وأزراره -->
+                <h2><i class="fa-regular fa-calendar" style="margin-right:6px;"></i>My Appointments</h2> <!-- عنوان مع أيقونة -->
                 <a asp-action="Create" class="btn-primary">
                     <i class="fas fa-calendar-plus"></i> Book New Appointment
                 </a>
             </div>
 
-            @if (TempData["SuccessMessage"] != null)
+            @if (TempData["SuccessMessage"] != null) // إذا يوجد رسالة نجاح (بعد إضافة أو إلغاء أو غيره)
             {
                 <div class="alert-success" role="alert">
                     @TempData["SuccessMessage"]
                 </div>
             }
 
-            @if (!Model.Any())
+            @if (!Model.Any()) // لو ليس لديك مواعيد حالياً
             {
                 <div class="alert-info" role="alert">
                     You don't have any appointments scheduled. Book one now!
                 </div>
             }
-            else
+            else // لو لديك مواعيد اعرض الجدول
             {
                 <div class="card-appointments" role="region" aria-live="polite" aria-relevant="additions">
                     <table>
@@ -633,9 +692,9 @@ margin-left:160% ;
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var appointment in Model)
+                            @foreach (var appointment in Model) // لكل موعد في القائمة
                             {
-                                var badgeClass = appointment.Status switch
+                                var badgeClass = appointment.Status switch // حدد لون البادج حسب الحالة
                                 {
                                     "Pending" => "bg-warning",
                                     "Approved" => "bg-success",
@@ -644,14 +703,14 @@ margin-left:160% ;
                                     _ => "bg-secondary"
                                 };
                                 <tr>
-                                    <td>@appointment.AppointmentDate.ToString("MMM dd, yyyy hh:mm tt")</td>
-                                    <td>@appointment.Purpose</td>
+                                    <td>@appointment.AppointmentDate.ToString("MMM dd, yyyy hh:mm tt")</td> <!-- تاريخ ووقت الموعد -->
+                                    <td>@appointment.Purpose</td> <!-- الغرض من الموعد -->
                                     <td>
-                                        <span class="badge @badgeClass">@appointment.Status</span>
+                                        <span class="badge @badgeClass">@appointment.Status</span> <!-- شارة بحالة الموعد -->
                                     </td>
-                                    <td>@appointment.Notes</td>
+                                    <td>@appointment.Notes</td> <!-- ملاحظات الموعد -->
                                     <td>
-                                        @if (appointment.Status == "Pending" || appointment.Status == "Approved")
+                                        @if (appointment.Status == "Pending" || appointment.Status == "Approved") // إن كان يمكن إلغاؤه
                                         {
                                             <a asp-action="Cancel" asp-route-id="@appointment.Id" class="btn-cancel"
                                                onclick="return confirm('Are you sure you want to cancel this appointment?')">
@@ -671,6 +730,7 @@ margin-left:160% ;
     <!-- Article Section -->
     <section class="main-article" aria-labelledby="service-heading">
         <div class="article-image" aria-hidden="true">
+            <!-- صورة تعريفية -->
             <img src="https://cdn.qwenlm.ai/2366582a-75c6-49d7-a890-5bd72233a6de/277ecfcd-c79c-44dc-8f75-29bd61cdb4b5_3e265ede-55d8-437a-8084-22e8ae6229df.jpg?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoiMjM2NjU4MmEtNzVjNi00OWQ3LWE4OTAtNWJkNzIyMzNhNmRlIiwicmVzb3VyY2VfaWQiOiIyNzdlY2ZjZC1jNzljLTQ0ZGMtOGY3NS0yOWJkNjFjZGI0YjUiLCJyZXNvdXJjZV9jaGF0X2lkIjpudWxsfQ.jF0LDj1HQZGLvWSAJlbilHp4u3AAtevQXvpr5t3M67g"
                  alt="Smiling bank staff providing excellent customer service" />
         </div>
@@ -683,138 +743,172 @@ margin-left:160% ;
         </article>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials-section" aria-label="Customer Testimonials">
-        <h2>Hear From Our Customers</h2>
-        <div class="toggle-group" role="tablist" aria-label="Testimonial Categories">
-            <button class="toggle-btn active" type="button" id="indivBtn" role="tab" aria-selected="true" aria-controls="carouselCards">For Individuals</button>
-            <button class="toggle-btn inactive" type="button" id="bizBtn" role="tab" aria-selected="false" aria-controls="carouselCards">For Businesses</button>
-        </div>
-        <div class="carousel" id="testimonialCarousel">
-            <div class="carousel-cards" id="carouselCards" tabindex="0" aria-live="polite" aria-atomic="true">
-                <!-- Testimonials will be injected here via JS -->
+    <!-- Testimonials Section (from Home page) -->
+    <div class="testimonials-section">
+        <!-- قسم آراء العملاء -->
+
+        <div class="testimonials-container">
+            <div class="testimonials-header">
+                <h2 class="testimonials-title">Testimonials</h2>
+                <p class="testimonials-subtitle">
+                    Discover how Nexus Bank has transformed lives with innovative digital solutions and personalized customer service. See why our clients trust us for a secure and prosperous financial journey
+                </p>
+            </div>
+
+            <div class="tabs-container">
+                <!-- حاوية أزرار التبديل بين شهادات الأفراد والشركات -->
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="switchTab('individuals')">For Individuals</button> <!-- زر شهادات الأفراد -->
+                    <button class="tab-button" onclick="switchTab('businesses')">For Businesses</button> <!-- زر شهادات الشركات -->
+                </div>
+            </div>
+
+            <div class="testimonials-slider">
+                <!-- سلايدر الشهادات -->
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <!-- شهادات الأفراد -->
+                    <div class="testimonials-group" id="individuals">
+                        <div class="testimonial-card">
+                            <div class="quote-icon">"</div>
+                            <p class="testimonial-text">
+                                YourBank has been my trusted financial partner for years. Their personalized service and innovative digital banking solutions have made managing my finances a breeze.
+                            </p>
+                            <div class="testimonial-author">Sara T</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="quote-icon">"</div>
+                            <p class="testimonial-text">
+                                I recently started my own business, and YourBank has been instrumental in helping me set up my business accounts and secure the financing I needed. Their expert guidance and tailored solutions have been invaluable.
+                            </p>
+                            <div class="testimonial-author">John D</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="quote-icon">"</div>
+                            <p class="testimonial-text">
+                                I love the convenience of YourBank's mobile banking app. It allows me to stay on top of my finances and make transactions on the go. The app is user-friendly and secure, giving me peace of mind.
+                            </p>
+                            <div class="testimonial-author">Emily G</div>
+                        </div>
+                    </div>
+
+                    <!-- شهادات الشركات -->
+                    <div class="testimonials-group" id="businesses">
+                        <div class="testimonial-card">
+                            <div class="quote-icon">"</div>
+                            <p class="testimonial-text">
+                                As a growing company, we needed a banking partner that could scale with us. Nexus Bank's corporate solutions and dedicated relationship manager have been game-changers for our financial operations.
+                            </p>
+                            <div class="testimonial-author">Ahmed M - CEO, TechCorp</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="quote-icon">"</div>
+                            <p class="testimonial-text">
+                                The trade finance solutions provided by Nexus Bank have streamlined our international operations. Their expertise in cross-border transactions has been instrumental in our global expansion.
+                            </p>
+                            <div class="testimonial-author">Maria L - CFO, GlobalTrade Ltd</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="quote-icon">"</div>
+                            <p class="testimonial-text">
+                                Nexus Bank's cash management platform has revolutionized how we handle our finances. The real-time insights and automated processes have improved our efficiency significantly.
+                            </p>
+                            <div class="testimonial-author">David K - Finance Director, InnovateTech</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
-       <!-- Footer Section -->
-  <footer class="footer">
+    <!-- Footer Section -->
+    <footer class="footer">
+        <!-- تذييل الموقع -->
         <div class="footer-container">
             <div class="footer-main">
                 <div class="footer-top">
                     <div class="logo-section">
-                        <div class="flogo">NB</div>
-                        <h2 class="bank-name">Nexus Bank</h2>
+                        <div class="flogo">NB</div> <!-- لوجو البنك NB -->
+                        <h2 class="bank-name">Nexus Bank</h2> <!-- اسم البنك -->
                     </div>
-                    
                     <div class="contact-info">
                         <div class="contact-item">
                             <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                             </svg>
-                            <span>Nexus@gmail.com</span>
+                            <span>Nexus@gmail.com</span> <!-- البريد الإلكتروني -->
                         </div>
-                        
                         <div class="contact-item">
                             <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                             </svg>
-                            <span>+20 1300000000</span>
+                            <span>+20 1300000000</span> <!-- رقم الهاتف -->
                         </div>
                     </div>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <div class="copyright">
-                    © 2025 Bank All Rights Reserved
+                    © 2025 Bank All Rights Reserved <!-- حقوق النشر -->
                 </div>
-                
                 <div class="footer-links">
-                <a href="/Home/Privacy">Privacy</a>
+                    <!-- روابط الشروط والخصوصية -->
+                    <a href="/Home/Privacy">Privacy</a>
                     <div class="divider"></div>
-                <a href="/Home/Terms">Terms of Service</a>
+                    <a href="/Home/Terms">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Testimonials JS (from Home page) -->
     <script>
-        const individualsTestimonials = [
-            {
-                author: "Sara T",
-                content: "Nexus Bank has been my trusted financial partner for years. Their personalized service and innovative banking solutions make managing my finances effortless."
-            },
-            {
-                author: "John D",
-                content: "Starting my business was made easier thanks to Nexus Bank’s expert guidance and support."
-            },
-            {
-                author: "Emily G",
-                content: "The mobile app is user-friendly and secure — perfect for busy people like me."
-            }
-        ];
-        const businessTestimonials = [
-            {
-                author: "AlfaTech Solutions",
-                content: "Nexus Bank understands our business needs and provides tailored financial solutions."
-            },
-            {
-                author: "Eastern Traders Ltd.",
-                content: "Reliable services that have kept our operations smooth and efficient."
-            },
-            {
-                author: "GreenFuture Energy",
-                content: "Their financing options helped us advance our green initiatives effectively."
-            }
-        ];
-
-        const carouselCards = document.getElementById('carouselCards');
-        const indivBtn = document.getElementById('indivBtn');
-        const bizBtn = document.getElementById('bizBtn');
-
-        function renderTestimonials(type) {
-            carouselCards.innerHTML = '';
-            const list = type === "business" ? businessTestimonials : individualsTestimonials;
-            list.forEach(t => {
-                const card = document.createElement('div');
-                card.classList.add('carousel-card');
-                card.innerHTML = `
-                    <div class="quote">“</div>
-                    <div class="card-content">${t.content}</div>
-                    <div class="author">${t.author}</div>
-                `;
-                carouselCards.appendChild(card);
-            });
-        }
-
-        function toggleTabs(activeType) {
-            if (activeType === "individuals") {
-                indivBtn.classList.add('active');
-                indivBtn.classList.remove('inactive');
-                bizBtn.classList.remove('active');
-                bizBtn.classList.add('inactive');
-                indivBtn.setAttribute('aria-selected', 'true');
-                bizBtn.setAttribute('aria-selected', 'false');
-                renderTestimonials("individuals");
+        let currentTab = 'individuals'; // المتغير الحالي لتتبع التبويب المناسب (افراد / شركات)
+        let currentSlide = 0; // المتغير الحالي للشريحة (للتحكم إذا فيه اكثر من شريحة)
+        const maxSlides = 1; // أقصى عدد شرائح (هنا 1 فقط فعلياً)
+        function switchTab(tab) { // عند الضغط على زر تبويب
+            const buttons = document.querySelectorAll('.tab-button'); // جلب كل الأزرار
+            const track = document.getElementById('testimonialsTrack'); // جزء سلايدر الشهادات
+            // تحديث أزرار التبويب الظاهري
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            // تغيير المجموعة الظاهرة بناء على التبويب
+            currentTab = tab;
+            currentSlide = 0;
+            if (tab === 'individuals') {
+                track.style.transform = 'translateX(0%)'; // يعرض شهادات الأفراد
             } else {
-                bizBtn.classList.add('active');
-                bizBtn.classList.remove('inactive');
-                indivBtn.classList.remove('active');
-                indivBtn.classList.add('inactive');
-                indivBtn.setAttribute('aria-selected', 'false');
-                bizBtn.setAttribute('aria-selected', 'true');
-                renderTestimonials("business");
+                track.style.transform = 'translateX(-50%)'; // يعرض شهادات الشركات
+            }
+            updateNavButtons(); // تحديث أزرار السلايدر (لو فيه)
+        }
+        function nextSlide() {
+            // للتنقل للأمام بين الشرائح (مستقبلاً: إذا أضفت أكثر من مجموعة شهادات)
+            if (currentSlide < maxSlides) {
+                currentSlide++;
+                updateSlider();
             }
         }
-
-        indivBtn.addEventListener('click', () => toggleTabs("individuals"));
-        bizBtn.addEventListener('click', () => toggleTabs("business"));
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderTestimonials("individuals");
-        });
+        function previousSlide() {
+            // للتنقل للخلف بين الشرائح
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlider();
+            }
+        }
+        function updateSlider() {
+            const track = document.getElementById('testimonialsTrack'); // الجزء المتحرك في الشهادات
+            const baseTransform = currentTab === 'individuals' ? 0 : -50; // تحديد أي مجموعة تظهر
+            track.style.transform = `translateX(${baseTransform}%)`;
+            updateNavButtons();
+        }
+        function updateNavButtons() {
+            // لو فيه أزرار هنا يتم تفعيلها/إخفاؤها حسب المتغيرات currentSlide & maxSlides
+        }
     </script>
 </body>
 </html>

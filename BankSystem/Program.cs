@@ -15,6 +15,7 @@ namespace BankSystem
             // Add DB context
             builder.Services.AddDbContext<BankContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConStr1")));
+
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
@@ -22,8 +23,15 @@ namespace BankSystem
                     options.AccessDeniedPath = "/Account/AccessDenied";
                 });
 
-            
             builder.Services.AddSession();
+
+            // «”„⁄ ⁄·Ï «·»Ê—  «··Ì Render » ÕœœÂ
+            var port = Environment.GetEnvironmentVariable("PORT");
+            if (!string.IsNullOrEmpty(port))
+            {
+                builder.WebHost.UseUrls($"http://*:{port}");
+            }
+
             var app = builder.Build();
 
             using (var scope = app.Services.CreateScope())
@@ -53,9 +61,8 @@ namespace BankSystem
 
             app.UseRouting();
 
-            app.UseSession(); 
-            app.UseAuthentication(); 
-
+            app.UseSession();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

@@ -1,610 +1,495 @@
-﻿/* =============== GLOBAL RESPONSIVE STYLES =============== */
-
-/* Reset and Base Styles */
+﻿/* ========================================
+   MOBILE-FIRST RESET AND BASE
+   ======================================== */
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f5f5f5;
+    min-height: 100vh;
     width: 100%;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* =============== MOBILE STYLES (max-width: 768px) =============== */
-@media (max-width: 768px) {
+/* ========================================
+   MOBILE CONTAINER
+   ======================================== */
+.mobile-container {
+    width: 100%;
+    min-height: 100vh;
+    max-width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+}
 
-    /* === NAVBAR === */
-    .navbar {
-        width: 100% !important;
-        margin: 10px 0 !important;
-        padding: 10px !important;
-        border-radius: 15px !important;
-        flex-direction: column;
-        gap: 10px;
+.content-wrapper {
+    padding: 15px;
+    padding-bottom: 80px; /* Space for bottom nav */
+}
+
+/* ========================================
+   MOBILE HEADER
+   ======================================== */
+.mobile-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: #1a5490;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.header-action {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+/* ========================================
+   MOBILE NAVIGATION
+   ======================================== */
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+    .nav-item.active {
+        color: #1a5490;
     }
 
-    .logo {
-        justify-content: center;
-        width: 100%;
+.nav-icon {
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+.nav-label {
+    font-size: 11px;
+}
+
+/* ========================================
+   MOBILE CARDS
+   ======================================== */
+.mobile-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.mobile-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.mobile-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* ========================================
+   ACCOUNT BALANCE CARD
+   ======================================== */
+.balance-card {
+    background: linear-gradient(135deg, #1a5490 0%, #2c7a7b 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .balance-card::after {
+        content: '';
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+        top: -50px;
+        right: -50px;
     }
 
-        .logo img {
-            margin-left: 0 !important;
-            width: 35px !important;
-            height: 35px !important;
-            transform: scale(1) !important;
-        }
+.balance-label {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
 
-    .nav-links {
-        padding: 0 !important;
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px !important;
+.balance-amount {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.account-number {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* ========================================
+   QUICK ACTIONS
+   ======================================== */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.quick-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .quick-action-btn:active {
+        transform: scale(0.95);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
-        .nav-links a {
-            font-size: 0.9rem !important;
-            padding: 5px 10px !important;
-        }
+.quick-action-icon {
+    font-size: 28px;
+    color: #1a5490;
+    margin-bottom: 5px;
+}
 
-    .auth-buttons {
-        width: 100%;
-        justify-content: center;
-        gap: 10px !important;
+.quick-action-label {
+    font-size: 12px;
+    color: #666;
+}
+
+/* ========================================
+   TRANSACTION LIST
+   ======================================== */
+.transaction-list {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.transaction-header {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transaction-item {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+    .transaction-item:active {
+        background: #f5f5f5;
     }
 
-    /* === HOME PAGE === */
-    .container {
-        flex-direction: column !important;
-        padding: 20px !important;
-        margin: 10px !important;
-        min-height: auto !important;
+    .transaction-item:last-child {
+        border-bottom: none;
     }
 
-    .left-section {
-        max-width: 100% !important;
-        margin: 0 !important;
-        text-align: center;
+.transaction-info {
+    flex: 1;
+}
+
+.transaction-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.transaction-date {
+    font-size: 13px;
+    color: #999;
+}
+
+.transaction-amount {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+    .transaction-amount.credit {
+        color: #4caf50;
+    }
+
+    .transaction-amount.debit {
+        color: #f44336;
+    }
+
+/* ========================================
+   MOBILE FORMS
+   ======================================== */
+.mobile-form {
+    padding: 16px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-input {
+    width: 100%;
+    height: 48px;
+    padding: 0 16px;
+    font-size: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+}
+
+    .form-input:focus {
+        outline: none;
+        border-color: #1a5490;
+        box-shadow: 0 0 0 3px rgba(26, 84, 144, 0.1);
+    }
+
+/* ========================================
+   MOBILE BUTTONS
+   ======================================== */
+.btn-mobile {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-appearance: none;
+}
+
+.btn-primary {
+    background: #1a5490;
+    color: white;
+}
+
+    .btn-primary:active {
+        background: #144070;
+        transform: scale(0.98);
+    }
+
+.btn-secondary {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #1a5490;
+    color: #1a5490;
+}
+
+/* ========================================
+   MOBILE MODAL
+   ======================================== */
+.mobile-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 2000;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+    .mobile-modal.active {
+        transform: translateY(0);
+    }
+
+.modal-handle {
+    width: 40px;
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+    margin: 0 auto 20px;
+}
+
+/* ========================================
+   LOADING STATES
+   ======================================== */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+/* Small phones (up to 360px) */
+@media (max-width: 360px) {
+    .quick-actions {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .balance-amount {
+        font-size: 24px;
+    }
+}
+
+/* Tablets (768px and up) */
+@media (min-width: 768px) {
+    .content-wrapper {
+        max-width: 768px;
+        margin: 0 auto;
         padding: 20px;
     }
 
-    .badge {
-        font-size: 12px !important;
-        padding: 6px 12px !important;
+    .mobile-nav {
+        max-width: 768px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
-    .left-section h1 {
-        font-size: 24px !important;
+    .quick-actions {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 15px;
     }
 
-    .left-section h2 {
-        font-size: 18px !important;
-    }
-
-    .left-section p {
-        font-size: 14px !important;
-        padding: 0 10px;
-    }
-
-    .button-group {
-        flex-direction: column !important;
-        gap: 15px !important;
-        margin: 20px 0 !important;
-        align-items: center;
-    }
-
-    .btn {
-        font-size: 1rem !important;
-        padding: 10px 30px !important;
-        width: 200px !important;
-        text-align: center;
-    }
-
-    /* Exchange Section */
-    .right-section {
-        width: 100% !important;
-        height: auto !important;
-        margin: 20px 0 !important;
-    }
-
-    .exchange-section {
-        padding: 20px !important;
-        height: auto !important;
-    }
-
-        .exchange-section h3 {
-            font-size: 1.5rem !important;
-            text-align: center;
-            margin-left: 0 !important;
-        }
-
-    .currency-select {
-        flex-direction: column !important;
-    }
-
-    .currency-box label {
-        font-size: 1rem !important;
-    }
-
-    .currency-box select, input {
-        width: 100% !important;
-        padding: 10px !important;
-    }
-
-    .amounts {
-        margin: 20px 0 !important;
-    }
-
-    #exchangeButton {
-        width: 100% !important;
-        margin: 20px 0 !important;
-    }
-
-    /* === PRODUCTS SECTION === */
-    .products {
-        padding: 20px 10px !important;
-    }
-
-    .intro h1 {
-        font-size: 2rem !important;
-        text-align: center;
-        margin-left: 0 !important;
-    }
-
-    .intro p {
-        font-size: 1rem !important;
-        margin: 0 10px 20px !important;
-    }
-
-    .tabs {
-        justify-content: center;
-        margin-right: 0 !important;
-    }
-
-    .tab {
-        font-size: 0.9rem !important;
-        padding: 8px 12px !important;
-        margin: 0 5px !important;
-    }
-
-    .product-section {
-        padding: 10px !important;
-    }
-
-    .product {
-        flex: 1 1 100% !important;
-        margin-bottom: 20px;
-        padding: 20px !important;
-    }
-
-        .product h3 {
-            font-size: 1.3rem !important;
-        }
-
-        .product p {
-            font-size: 0.95rem !important;
-        }
-
-    /* === USE CASES === */
-    .use-case {
-        height: auto !important;
-    }
-
-    .left-side, .right-side, .left, .right {
-        width: 95% !important;
-        height: auto !important;
-        margin: 15px auto !important;
-    }
-
-    .contain {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
-    }
-
-    .item {
-        height: 120px !important;
-        width: 100% !important;
-    }
-
-        .item img {
-            width: 40px !important;
-            height: 40px !important;
-        }
-
-        .item h1 {
-            font-size: 0.9rem !important;
-        }
-
-    .description {
-        font-size: 1rem !important;
-        text-align: center;
-        padding: 0 20px;
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr !important;
-        gap: 15px !important;
-    }
-
-    /* === FEATURES === */
-    .video-background {
-        width: 100% !important;
-        height: auto !important;
-        margin: 0 !important;
-    }
-
-        .video-background video {
-            display: none !important;
-        }
-
-    .featuer {
-        width: 100% !important;
-        margin: 0 !important;
-        height: auto !important;
-    }
-
-    .featuer-intro h1 {
-        font-size: 2rem !important;
-        text-align: center;
-        margin-left: 0 !important;
-    }
-
-    .featuer-header {
-        flex-direction: column !important;
-        width: 100% !important;
-        margin: 0 !important;
-    }
-
-    .sidebar {
-        flex-direction: row !important;
-        overflow-x: auto !important;
-        width: 100% !important;
-        margin-top: 0 !important;
-    }
-
-        .sidebar button {
-            min-width: 120px !important;
-            font-size: 0.9rem !important;
-        }
-
-    .features {
-        grid-template-columns: 1fr !important;
-    }
-
-    .feature-box {
-        font-size: 1.1rem !important;
-        margin: 0 !important;
-        padding: 15px !important;
-    }
-
-    /* === TESTIMONIALS === */
-    .testimonials-section {
-        padding: 20px 10px !important;
-    }
-
-    .testimonials-title {
-        font-size: 2rem !important;
-    }
-
-    .testimonials-subtitle {
-        font-size: 1rem !important;
-        margin: 0 10px !important;
-        min-width: auto !important;
-    }
-
-    .tab-buttons {
-        width: 95% !important;
-    }
-
-    .tab-button {
-        font-size: 0.85rem !important;
-        padding: 8px 12px !important;
-    }
-
-    .testimonials-group {
-        flex-direction: column !important;
-    }
-
-    .testimonial-card {
-        margin: 10px 0 !important;
-    }
-
-    /* === FOOTER === */
-    .footer-top {
-        flex-direction: column !important;
-        text-align: center;
-    }
-
-    .contact-info {
-        flex-direction: column !important;
-    }
-
-    .footer-bottom {
-        flex-direction: column !important;
-        text-align: center;
-    }
-
-    .footer-links {
-        margin-top: 15px !important;
-    }
-
-    /* === LOGIN & REGISTER PAGES === */
-    .auth-container, .login-container, .register-container {
-        width: 95% !important;
-        margin: 20px auto !important;
-        padding: 20px !important;
-    }
-
-    .auth-form, .login-form, .register-form {
-        width: 100% !important;
-    }
-
-    .form-group {
-        margin-bottom: 15px !important;
-    }
-
-    .form-control {
-        font-size: 16px !important; /* منع zoom على iOS */
-        padding: 10px !important;
-    }
-
-    /* === DASHBOARD PAGES === */
-    .dashboard-container {
-        flex-direction: column !important;
-        padding: 10px !important;
-    }
-
-    .dashboard-sidebar {
-        width: 100% !important;
-        margin-bottom: 20px !important;
-    }
-
-    .dashboard-content {
-        width: 100% !important;
-        padding: 15px !important;
-    }
-
-    .card, .dashboard-card {
-        margin-bottom: 15px !important;
-        padding: 15px !important;
-    }
-
-    .table-responsive {
-        overflow-x: auto !important;
-    }
-
-    table {
-        font-size: 0.85rem !important;
-    }
-
-    /* === TRANSACTION PAGES === */
-    .transaction-form {
-        width: 100% !important;
-        padding: 20px !important;
-    }
-
-    .amount-input {
-        font-size: 16px !important;
-        width: 100% !important;
-    }
-
-    /* === APPOINTMENT PAGES === */
-    .appointment-grid {
-        grid-template-columns: 1fr !important;
-    }
-
-    .appointment-card {
-        width: 100% !important;
-        margin-bottom: 15px !important;
-    }
-
-    /* === ABOUT, CAREERS, SECURITY PAGES === */
-    .content-section {
-        padding: 20px !important;
-        margin: 10px !important;
-    }
-
-    .content-header {
-        font-size: 2rem !important;
-        text-align: center;
-    }
-
-    .content-text {
-        font-size: 1rem !important;
-        line-height: 1.6;
-    }
-
-    /* === CARDS PAGE === */
-    .card-grid {
-        grid-template-columns: 1fr !important;
-        gap: 15px !important;
-    }
-
-    .credit-card {
-        width: 100% !important;
-        max-width: 350px !important;
-        margin: 0 auto !important;
-    }
-
-    /* === GENERAL UTILITIES === */
-    .hide-mobile {
-        display: none !important;
-    }
-
-    .text-center-mobile {
-        text-align: center !important;
-    }
-
-    .full-width-mobile {
-        width: 100% !important;
-    }
-
-    /* Fix padding and margins */
-    .p-5 {
-        padding: 20px !important;
-    }
-
-    .m-5 {
-        margin: 20px !important;
-    }
-
-    .px-5 {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-    }
-
-    .py-5 {
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
+    .mobile-card {
+        padding: 24px;
     }
 }
 
-/* =============== TABLET STYLES (769px - 1024px) =============== */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .navbar {
-        width: 95% !important;
+/* Desktop (1024px and up) */
+@media (min-width: 1024px) {
+    /* Hide mobile nav on desktop */
+    .mobile-nav {
+        display: none;
     }
 
-    .container {
-        padding: 40px !important;
+    .content-wrapper {
+        max-width: 1200px;
+        padding-bottom: 40px;
     }
 
-    .left-section h1 {
-        font-size: 35px !important;
+    /* Show desktop navigation */
+    .desktop-nav {
+        display: flex;
     }
 
-    .product {
-        flex: 1 1 calc(50% - 20px) !important;
+    /* Adjust header */
+    .mobile-header {
+        position: static;
+        height: 70px;
+        padding: 0 40px;
     }
 
-    .contain {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-
-    .features {
-        grid-template-columns: repeat(2, 1fr) !important;
-    }
-
-    .testimonials-group {
-        flex-wrap: wrap !important;
-    }
-
-    .testimonial-card {
-        flex: 1 1 calc(50% - 20px) !important;
+    /* Grid layout for desktop */
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1fr 350px;
+        gap: 30px;
     }
 }
 
-/* =============== SMALL MOBILE (max-width: 480px) =============== */
-@media (max-width: 480px) {
-    /* Extra small adjustments */
-    .left-section h1 {
-        font-size: 20px !important;
+/* Safe area support for modern phones */
+@supports (padding: max(0px)) {
+    .mobile-header {
+        padding-top: max(0px, env(safe-area-inset-top));
     }
 
-    .left-section h2 {
-        font-size: 16px !important;
-    }
-
-    .btn {
-        font-size: 0.9rem !important;
-        padding: 8px 20px !important;
-        width: 150px !important;
-    }
-
-    .intro h1 {
-        font-size: 1.5rem !important;
-    }
-
-    .contain {
-        grid-template-columns: 1fr !important;
-    }
-
-    .item {
-        height: 100px !important;
-    }
-
-    .testimonials-title {
-        font-size: 1.5rem !important;
-    }
-
-    .nav-links a {
-        font-size: 0.8rem !important;
-        padding: 4px 8px !important;
-    }
-}
-
-/* =============== UTILITY CLASSES =============== */
-
-/* Show only on mobile */
-@media (min-width: 769px) {
-    .show-mobile {
-        display: none !important;
-    }
-}
-
-/* Hide on mobile */
-@media (max-width: 768px) {
-    .hide-mobile {
-        display: none !important;
-    }
-}
-
-/* =============== FIX COMMON ISSUES =============== */
-
-/* Prevent horizontal scroll */
-@media (max-width: 768px) {
-    body {
-        overflow-x: hidden !important;
-    }
-
-    * {
-        max-width: 100vw !important;
-    }
-}
-
-/* Fix images */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Fix forms on mobile */
-@media (max-width: 768px) {
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    input[type="number"],
-    select,
-    textarea {
-        font-size: 16px !important; /* Prevents zoom on iOS */
-        width: 100% !important;
-    }
-}
-
-/* Fix buttons */
-@media (max-width: 768px) {
-    button, .btn, input[type="submit"] {
-        min-height: 44px !important; /* Apple's recommended touch target */
-        min-width: 44px !important;
-    }
-}
-
-/* Fix tables */
-@media (max-width: 768px) {
-    .table-container {
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    table {
-        min-width: 500px;
-    }
-}
-
-/* Print styles */
-@media print {
-    .no-print, .navbar, .footer {
-        display: none !important;
+    .mobile-nav {
+        padding-bottom: max(0px, env(safe-area-inset-bottom));
     }
 }

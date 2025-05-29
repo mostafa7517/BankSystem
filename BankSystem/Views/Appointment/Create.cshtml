@@ -1,44 +1,43 @@
-﻿@model BankSystem.ViewModels.AppointmentViewModel
+﻿@model BankSystem.ViewModels.AppointmentViewModel // ربط الصفحة بنموذج حجز الموعد
 @{
-    ViewData["Title"] = "Book Appointment";
-    Layout = null;
+    ViewData["Title"] = "Book Appointment"; // عنوان الصفحة
+    Layout = null; // عدم استخدام Layout خارجي
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>@ViewData["Title"] - Nexus Bank</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8"> <!-- الترميز -->
+    <title>@ViewData["Title"] - Nexus Bank</title> <!-- عنوان التبويب -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- لجعل الصفحة متجاوبة -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> <!-- خط مونتسيرات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- أيقونات -->
     <style>
         :root {
             --primary: #7ea1ce;
-            --secondary: #bdd7ee;
-            --deep-blue: #285686;
-            --header-bg: #c3daf4;
-            --footer-bg: #7ea1ce;
-            --footer-light: #c3daf4;
-            --white: #f8f8fa;
+            // لون أساسي --secondary: #bdd7ee;
+            // لون ثانوي --deep-blue: #285686;
+            // أزرق غامق --header-bg: #c3daf4;
+            // خلفية الهيدر --footer-bg: #7ea1ce;
+            // خلفية الفوتر --footer-light: #c3daf4;
+            // لون فاتح للفوتر --white: #f8f8fa;
             --text: #19557b;
+            // لون النص
         }
 
         body {
             font-family: 'Montserrat', Arial, sans-serif;
-            margin: 0;
-            /* background: linear-gradient(135deg, #003366 0%, #001122 50%, #002244 100%); */
+            // نوع الخط margin: 0;
             color: var(--text);
-              background-image: url('../img/c14.jpg');
-  background-size: cover;
-  background-repeat: repeat;
-  background-position: center;
-  background-attachment: fixed;
+            // لون النص الأساسي background-image: url('../img/c14.jpg');
+            // صورة خلفية background-size: cover;
+            // تغطية الخلفية background-repeat: repeat;
+            background-position: center;
+            background-attachment: fixed;
         }
-
 
         .navbar {
             background-color: #003366;
-            border: 3px solid #FFF2F2;
+            // لون شريط التنقل border: 3px solid #FFF2F2;
             border-radius: 30px;
             padding: 10px 30px;
             margin: 20px auto;
@@ -59,13 +58,9 @@
             .logo img {
                 width: 40px;
                 height: 40px;
-                transform: scale(1.5); /* يكبر اللوجو */
-                border-radius: 50%;
+                transform: scale(1.5); /* تكبير الشعار */
+                border-radius: 50%; /* دائري */
                 margin-left: 160%;
-            }
-
-            .logo .highlight {
-                color: #d0d0ff;
             }
 
         .nav-links {
@@ -78,7 +73,7 @@
 
             .nav-links a {
                 color: #ffffff;
-                cursor: pointer;
+                // لون الروابط cursor: pointer;
                 transition: 0.3s;
                 padding: 6px 16px;
                 border-radius: 20px;
@@ -86,6 +81,7 @@
                 font-size: 1.2rem;
                 text-decoration: none;
             }
+
         .lang-btn {
             position: absolute;
             right: -110px;
@@ -115,7 +111,7 @@
 
         .appoint-card {
             background: rgba(255, 255, 255, 0.3);
-            border-radius: 40px;
+            // خلفية شفافة للكارت border-radius: 40px;
             padding: 58px 48px 36px 48px;
             width: 500px;
             max-width: 98vw;
@@ -125,7 +121,7 @@
         }
 
             .appoint-card h2 {
-                color:  #285686;
+                color: #285686;
                 text-align: center;
                 font-size: 2.16rem;
                 font-weight: 700;
@@ -135,7 +131,7 @@
 
         .form-label, .appoint-label {
             font-size: 1.06em;
-            color:  #285686;
+            color: #285686;
             font-weight: 600;
             margin-bottom: 4px;
             display: block;
@@ -162,13 +158,13 @@
 
         .text-danger, .validation-summary-errors, .field-validation-error {
             color: #dc3545 !important;
-            font-size: 0.98em;
+            // لون رسالة الخطأ font-size: 0.98em;
             background: transparent !important;
         }
 
         .appoint-btn-main {
             background: var(--deep-blue);
-            color: #fff;
+            // لون زر تأكيد الحجز color: #fff;
             border-radius: 32px;
             padding: 5px 0;
             font-size: 1.09rem;
@@ -183,6 +179,7 @@
 
             .appoint-btn-main:hover {
                 background: #13335a;
+                // لون غامق عند المرور
             }
 
         .appoint-btn-cancel {
@@ -227,16 +224,16 @@
             overflow: hidden;
         }
 
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
+            .footer::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+                pointer-events: none;
+            }
 
         .footer-container {
             max-width: 1200px;
@@ -306,10 +303,10 @@
             transition: all 0.3s ease;
         }
 
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
+            .contact-item:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
 
         .contact-icon {
             width: 20px;
@@ -347,11 +344,11 @@
             border-radius: 6px;
             border: 1px solid transparent;
         }
-            
-            .footer-links a{
-              text-decoration: none;
-              color: #ffffff;
-            }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #ffffff;
+        }
 
         .footer-link:hover {
             background: rgba(255, 255, 255, 0.1);
@@ -369,8 +366,9 @@
 
 <header>
     <nav class="navbar">
+        <!-- شريط التنقل الرئيسي -->
         <div class="logo">
-            <img src="/img/nav.jpg" alt="Logo" />
+            <img src="/img/nav.jpg" alt="Logo" /> <!-- شعار البنك -->
         </div>
         <ul class="nav-links">
             <a href="/Home/Index">Home</a>
@@ -378,25 +376,24 @@
             <a href="/Home/About">About</a>
             <a href="/Home/Security">Security</a>
         </ul>
-
     </nav>
-
 </header>
 <body>
-   
-    <!-- Form Card -->
+    <!-- كارت حجز الموعد -->
     <div class="appoint-section">
         <div class="appoint-card">
             <h2>📅 Book an Appointment</h2>
             <form asp-action="Create" method="post" autocomplete="off" id="appointForm">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!-- نموذج الموعد -->
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- ملخص الأخطاء -->
                 <div style="margin-bottom:18px;">
-                    <label asp-for="AppointmentDate" class="form-label">Date</label>
-                    <input id="appointmentDate" type="date" class="form-control" required />
+                    <label asp-for="AppointmentDate" class="form-label">Date</label> <!-- عنوان حقل التاريخ -->
+                    <input id="appointmentDate" type="date" class="form-control" required /> <!-- حقل التاريخ -->
 
-                    <label class="form-label" style="margin-top:6px;">Time</label>
+                    <label class="form-label" style="margin-top:6px;">Time</label> <!-- عنوان حقل الوقت -->
                     <div class="appoint-row">
                         <select id="appointmentHour" class="form-select" required>
+                            <!-- اختيار الساعة -->
                             <option value="">Hour</option>
                             <option value="9">9 AM</option>
                             <option value="10">10 AM</option>
@@ -406,6 +403,7 @@
                             <option value="14">2 PM</option>
                         </select>
                         <select id="appointmentMinute" class="form-select" required>
+                            <!-- اختيار الدقائق -->
                             <option value="">Minute</option>
                             <option value="00">00</option>
                             <option value="15">15</option>
@@ -413,14 +411,15 @@
                             <option value="45">45</option>
                         </select>
                     </div>
-                    <!-- Hidden field to store the actual datetime value -->
+                    <!-- حقل مخفي لتخزين التاريخ والوقت الفعلي معًا -->
                     <input asp-for="AppointmentDate" type="hidden" id="fullAppointmentDateTime" />
-                    <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+                    <span asp-validation-for="AppointmentDate" class="text-danger"></span> <!-- رسالة خطأ التاريخ -->
                     <small class="small">Please select a date and time during business hours (9 AM - 3 PM)</small>
                 </div>
                 <div style="margin-bottom:17px;">
-                    <label asp-for="Purpose" class="form-label">Purpose</label>
+                    <label asp-for="Purpose" class="form-label">Purpose</label> <!-- عنوان الغرض -->
                     <select asp-for="Purpose" class="form-select" required>
+                        <!-- اختيار الغرض -->
                         <option value="">-- Select Purpose --</option>
                         <option value="Account Services">Account Services</option>
                         <option value="Loan Consultation">Loan Consultation</option>
@@ -438,15 +437,15 @@
                     <span asp-validation-for="Notes" class="text-danger"></span>
                 </div>
                 <div style="display:flex; justify-content:end; gap:18px; margin-top: 24px;">
-                    <a asp-action="Index" class="appoint-btn-cancel">Cancel</a>
-                    <button type="submit" class="appoint-btn-main" id="submitBtn">Book Appointment</button>
+                    <a asp-action="Index" class="appoint-btn-cancel">Cancel</a> <!-- زر إلغاء -->
+                    <button type="submit" class="appoint-btn-main" id="submitBtn">Book Appointment</button> <!-- زر تأكيد الحجز -->
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Footer Section -->
-  <footer class="footer">
+    <!-- الفوتر -->
+    <footer class="footer">
         <div class="footer-container">
             <div class="footer-main">
                 <div class="footer-top">
@@ -454,41 +453,37 @@
                         <div class="flogo">NB</div>
                         <h2 class="bank-name">Nexus Bank</h2>
                     </div>
-                    
                     <div class="contact-info">
                         <div class="contact-item">
                             <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                             </svg>
                             <span>Nexus@gmail.com</span>
                         </div>
-                        
                         <div class="contact-item">
                             <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                             </svg>
                             <span>+20 1300000000</span>
                         </div>
                     </div>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <div class="copyright">
-                    © 2025 Bank All Rights Reserved
+                    © 2025 Bank All Rights Reserved <!-- حقوق النشر -->
                 </div>
-                
                 <div class="footer-links">
-                <a href="/Home/Privacy">Privacy</a>
+                    <a href="/Home/Privacy">Privacy</a>
                     <div class="divider"></div>
-                <a href="/Home/Terms">Terms of Service</a>
+                    <a href="/Home/Terms">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function () { // ضبط تاريخ الغد كحد أدنى
             // Set minimum date to tomorrow
             const today = new Date();
             const tomorrow = new Date(today);
@@ -500,30 +495,30 @@
             dateInput.min = formattedDate;
             dateInput.value = formattedDate;
 
-            // Handle form submission - combine date and time
+            // عند إرسال النموذج - دمج التاريخ والوقت في قيمة واحدة مخفية
             document.getElementById('appointForm').addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                const date = document.querySelector('#appointmentDate').value;
-                const hour = document.querySelector('#appointmentHour').value;
-                const minute = document.querySelector('#appointmentMinute').value;
+                const date = document.querySelector('#appointmentDate').value; // اليوم
+                const hour = document.querySelector('#appointmentHour').value; // الساعة
+                const minute = document.querySelector('#appointmentMinute').value; // الدقائق
 
                 if (!date || !hour || !minute) {
                     alert('Please select date, hour, and minute for your appointment.');
                     return;
                 }
 
-                // Combine into datetime string in format YYYY-MM-DDThh:mm:ss
+                // دمج التاريخ والوقت معًا في الحقل المخفي
                 const combinedDateTime = `${date}T${hour}:${minute}:00`;
                 document.querySelector('#fullAppointmentDateTime').value = combinedDateTime;
 
-                // Submit the form
+                // إرسال النموذج بعد الترتيب
                 this.submit();
             });
         });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script> <!-- التحقق من صحة النماذج -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script> <!-- مزيد من التحقق unobtrusive -->
 </body>
 </html>

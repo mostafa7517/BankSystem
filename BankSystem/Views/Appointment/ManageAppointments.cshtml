@@ -1,19 +1,18 @@
-﻿@model IEnumerable<BankSystem.Data.Appointment>
+﻿@model IEnumerable<BankSystem.Data.Appointment> // صفحة إدارة المواعيد تعرض كل المواعيد
 @{
-    ViewData["Title"] = "Manage Appointments";
+    ViewData["Title"] = "Manage Appointments"; // عنوان الصفحة
 
-    // Calculate counts for dashboard
-    var pendingCount = Model.Count(a => a.Status == "Pending");
-    var approvedCount = Model.Count(a => a.Status == "Approved");
-    var completedCount = Model.Count(a => a.Status == "Completed");
-    var cancelledCount = Model.Count(a => a.Status == "Cancelled");
-    var totalCount = Model.Count();
+    // حساب إحصائيات الحالات المختلفة لبطاقات الملخص
+    var pendingCount = Model.Count(a => a.Status == "Pending");      // عدد الطلبات المعلقة
+    var approvedCount = Model.Count(a => a.Status == "Approved");    // عدد الطلبات المقبولة
+    var completedCount = Model.Count(a => a.Status == "Completed");  // عدد الطلبات المنجزة
+    var cancelledCount = Model.Count(a => a.Status == "Cancelled");  // عدد الطلبات الملغية
+    var totalCount = Model.Count();                                  // إجمالي عدد المواعيد
 }
 
-
 <style>
-    body{
-        background-image: url('../img/c5.jpg');
+    body {
+        background-image: url('../img/c5.jpg'); /* خلفية الصفحة */
         background-size: cover;
         background-repeat: repeat;
         background-position: center;
@@ -21,19 +20,17 @@
         color: var(--text);
         font-family: 'Montserrat', Arial, sans-serif;
     }
-
-
 </style>
 <div class="container mt-5">
-    <!-- Header with actions -->
+    <!-- الهيدر والعنوان وأزرار الإجراءات -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2 class="fw-bold text-secondary">📋 Appointment Manager</h2>
+            <h2 class="fw-bold text-secondary">📋 Appointment Manager</h2> <!-- عنوان لوحة الإدارة -->
             <p class="text-muted">Review and process customer appointment requests</p>
         </div>
         <div>
             <a asp-controller="Account" asp-action="Logout" class="btn btn-outline-danger">
-                🚪 Logout
+                🚪 Logout <!-- زر تسجيل الخروج -->
             </a>
         </div>
     </div>
@@ -41,7 +38,7 @@
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            @TempData["SuccessMessage"]
+            @TempData["SuccessMessage"] <!-- رسالة نجاح في حال وُجدت -->
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
@@ -49,18 +46,18 @@
     @if (TempData["ErrorMessage"] != null)
     {
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            @TempData["ErrorMessage"]
+            @TempData["ErrorMessage"] <!-- رسالة خطأ في حال وُجدت -->
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
 
-    <!-- Status Summary Cards - styled like the employee dashboard -->
+    <!-- بطاقات ملخص لحالات المواعيد -->
     <div class="row text-center mb-4">
         <div class="col-md-3 mb-3">
             <div class="card shadow-sm">
                 <div class="card-header bg-secondary text-white fw-semibold">Pending Requests</div>
                 <div class="card-body">
-                    <h1 class="display-5">@pendingCount</h1>
+                    <h1 class="display-5">@pendingCount</h1> <!-- عدد الطلبات المعلقة -->
                 </div>
             </div>
         </div>
@@ -68,7 +65,7 @@
             <div class="card shadow-sm">
                 <div class="card-header bg-secondary text-white fw-semibold">Approved</div>
                 <div class="card-body">
-                    <h1 class="display-5">@approvedCount</h1>
+                    <h1 class="display-5">@approvedCount</h1> <!-- عدد المعتمدة -->
                 </div>
             </div>
         </div>
@@ -76,7 +73,7 @@
             <div class="card shadow-sm">
                 <div class="card-header bg-secondary text-white fw-semibold">Completed</div>
                 <div class="card-body">
-                    <h1 class="display-5">@completedCount</h1>
+                    <h1 class="display-5">@completedCount</h1> <!-- عدد المكتملة -->
                 </div>
             </div>
         </div>
@@ -84,7 +81,7 @@
             <div class="card shadow-sm">
                 <div class="card-header bg-secondary text-white fw-semibold">Cancelled</div>
                 <div class="card-body">
-                    <h1 class="display-5">@cancelledCount</h1>
+                    <h1 class="display-5">@cancelledCount</h1> <!-- عدد الملغية -->
                 </div>
             </div>
         </div>
@@ -92,20 +89,20 @@
 
     <div class="text-center mb-4">
         <a asp-controller="Employee" asp-action="Dashboard" class="btn btn-outline-secondary btn-lg me-2">
-            🏠 Back to Dashboard
+            🏠 Back to Dashboard <!-- زر العودة للوحة الموظفين -->
         </a>
     </div>
 
-    @if (!Model.Any())
+    @if (!Model.Any()) // إذا لم يوجد أي موعد
     {
         <div class="alert alert-info text-center">
             There are no appointments to manage at this time.
         </div>
     }
-    else
+    else // إذا وُجدت مواعيد
     {
         <div class="row">
-            <!-- Chart -->
+            <!-- رسم بياني دائري يوضح توزيع الحالات -->
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header bg-light">
@@ -113,9 +110,10 @@
                     </div>
                     <div class="card-body">
                         <div class="chart-pie mb-4" style="height: 250px;">
-                            <canvas id="appointmentChart"></canvas>
+                            <canvas id="appointmentChart"></canvas> <!-- مكان رسم الرسم البياني الدائري -->
                         </div>
                         <div class="mt-4 text-center small">
+                            <!-- شرح الألوان المستخدمة بالرسم البياني -->
                             <span class="me-2">
                                 <i class="fas fa-circle text-primary"></i> Pending
                             </span>
@@ -133,16 +131,17 @@
                 </div>
             </div>
 
-            <!-- Tab Navigation -->
+            <!-- تبويبات إدارة المواعيد حسب الحالة -->
             <div class="col-md-8 mb-4">
                 <div class="card shadow-sm">
+                    <!-- شريط التبويبات -->
                     <div class="card-header bg-light p-0">
                         <ul class="nav nav-tabs card-header-tabs" id="appointmentTabs" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pending-tab" data-bs-toggle="tab"
                                         data-bs-target="#pending" type="button" role="tab">
                                     Pending
-                                    <span class="badge bg-primary">@pendingCount</span>
+                                    <span class="badge bg-primary">@pendingCount</span> <!-- عداد -->
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -170,21 +169,22 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="tab-content" id="appointmentTabContent">
-                            <!-- Pending Appointments -->
+
+                            <!-- محتوى تبويب الطلبات المعلقة -->
                             <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                                 <div class="table-responsive">
                                     <table class="table table-hover align-middle mb-0">
                                         <thead class="table-light">
                                             <tr>
-                                                <th>Customer</th>
-                                                <th>Date & Time</th>
-                                                <th>Purpose</th>
-                                                <th>Notes</th>
-                                                <th>Actions</th>
+                                                <th>Customer</th>         <!-- اسم العميل -->
+                                                <th>Date & Time</th>      <!-- التاريخ والوقت -->
+                                                <th>Purpose</th>          <!-- الغرض -->
+                                                <th>Notes</th>            <!-- ملاحظات -->
+                                                <th>Actions</th>          <!-- الخيارات (اعتماد/رفض) -->
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (var appointment in Model.Where(a => a.Status == "Pending"))
+                                            @foreach (var appointment in Model.Where(a => a.Status == "Pending")) // استعراض المعلقة فقط
                                             {
                                                 <tr>
                                                     <td>@appointment.Customer.Name</td>
@@ -193,6 +193,7 @@
                                                     <td class="text-truncate" style="max-width: 200px;">@appointment.Notes</td>
                                                     <td>
                                                         <div class="btn-group btn-group-sm">
+                                                            <!-- زر اعتماد الموعد (Approve) -->
                                                             <form asp-action="UpdateStatus" method="post" class="me-1">
                                                                 <input type="hidden" name="id" value="@appointment.Id" />
                                                                 <input type="hidden" name="status" value="Approved" />
@@ -201,6 +202,7 @@
                                                                     Approve
                                                                 </button>
                                                             </form>
+                                                            <!-- زر رفض الموعد (Reject/Cancel) -->
                                                             <form asp-action="UpdateStatus" method="post">
                                                                 <input type="hidden" name="id" value="@appointment.Id" />
                                                                 <input type="hidden" name="status" value="Cancelled" />
@@ -226,7 +228,7 @@
                                 </div>
                             </div>
 
-                            <!-- Approved Appointments -->
+                            <!-- محتوى تبويب الطلبات المعتمدة -->
                             <div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="approved-tab">
                                 <div class="table-responsive">
                                     <table class="table table-hover align-middle mb-0">
@@ -248,6 +250,7 @@
                                                     <td>@appointment.Purpose</td>
                                                     <td class="text-truncate" style="max-width: 200px;">@appointment.Notes</td>
                                                     <td>
+                                                        <!-- زر انهاء الموعد (Completed) -->
                                                         <form asp-action="UpdateStatus" method="post">
                                                             <input type="hidden" name="id" value="@appointment.Id" />
                                                             <input type="hidden" name="status" value="Completed" />
@@ -272,7 +275,7 @@
                                 </div>
                             </div>
 
-                            <!-- Completed Appointments -->
+                            <!-- محتوى تبويب الطلبات المكتملة -->
                             <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
                                 <div class="table-responsive">
                                     <table class="table table-hover align-middle mb-0">
@@ -307,7 +310,7 @@
                                 </div>
                             </div>
 
-                            <!-- Cancelled Appointments -->
+                            <!-- محتوى تبويب الطلبات الملغية -->
                             <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="cancelled-tab">
                                 <div class="table-responsive">
                                     <table class="table table-hover align-middle mb-0">
@@ -340,7 +343,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            </div> <!-- نهاية التبويبات -->
                         </div>
                     </div>
                 </div>
@@ -350,24 +353,24 @@
 </div>
 
 @section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script> <!-- مكتبة Chart.js للرسم البياني -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Auto-dismiss alerts after 5 seconds
+            // Auto-dismiss alerts after 5 seconds إخفاء رسائل التنبيه تلقائي بعد فترة
             setTimeout(function () {
                 document.querySelectorAll('.alert').forEach(alert => {
                     bootstrap.Alert.getOrCreateInstance(alert).close();
                 });
             }, 5000);
 
-            // Create the pie chart
+            // رسم الدائرة البيانية لتوزيع الحالات
             const ctx = document.getElementById('appointmentChart').getContext('2d');
             const appointmentChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     labels: ['Pending', 'Approved', 'Completed', 'Cancelled'],
                     datasets: [{
-                        data: [@pendingCount, @approvedCount, @completedCount, @cancelledCount],
+                        data: [@pendingCount, @approvedCount, @completedCount, @cancelledCount], // القيم
                         backgroundColor: [
                             '#4e73df', // Primary - blue
                             '#1cc88a', // Success - green
