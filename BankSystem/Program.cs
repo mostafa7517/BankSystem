@@ -12,6 +12,18 @@ namespace BankSystem
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            // Add CORS - œÂ «·ÃœÌœ!
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin()
+                              .AllowAnyMethod()
+                              .AllowAnyHeader();
+                    });
+            });
+
             // Add DB context
             builder.Services.AddDbContext<BankContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConStr1")));
@@ -60,6 +72,9 @@ namespace BankSystem
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            // Add CORS middleware - œÂ «·ÃœÌœ!
+            app.UseCors("AllowAll");
 
             app.UseSession();
             app.UseAuthentication();
