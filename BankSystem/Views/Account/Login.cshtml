@@ -1,0 +1,558 @@
+﻿@{
+    ViewData["Title"] = "Login"; 
+    Layout = null; 
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <title>@ViewData["Title"] - Nexus Bank</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> <!-- تحميل خط Montserrat من جوجل لاستخدامه في التنسيق -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" /> <!-- تضمين مكتبة أيقونات Font Awesome لتسهيل استخدام الأيقونات في الصفحة -->
+    <style>
+        :root {
+            --primary: #7ea1ce; /* متغير للألوان الأساسية */
+            --secondary: #bdd7ee; /* متغير للون ثانوي */
+            --deep-blue: #285686; /* متغير للون أزرق غامق */
+            --header-bg: #c3daf4; /* لون خلفية العناوين */
+            --footer-bg: #7ea1ce; /* لون خلفية الفوتر */
+            --footer-light: #c3daf4; /* لون الفوتر الفاتح */
+            --white: #f8f8fa; /* الأبيض */
+            --text: #19557b; /* لون الخط الرئيسي */
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif; /* نوع الخط الأساسي للصفحة */
+            margin: 0; /* إزالة الهوامش الافتراضية حول الجسم */
+            /* background: var(--white) url('https://cdn.vectorstock.com/i/500p/52/71/laptop-computer-with-stock-market-background-vector-25695271.avif') no-repeat center center fixed;
+                            background-size: cover; */ /* كود سابق لخلفية ملغي بالتعليق */
+            color: var(--text); /* تعيين لون النص */
+            background-image: url('../img/c1.jpg'); /* تعيين صورة كخلفية للصفحة */
+            background-size: cover; /* جعل الخلفية تغطي الصفحه كلها */
+            background-repeat: repeat; /* تكرار الخلفية لو الصورة صغيرة */
+            background-position: center; /* وضع الخلفية في وسط الصفحة */
+            height: 100vh; /* جعل الطول يساوي طول الشاشة بالكامل */
+            background-attachment: fixed; /* تثبيت الخلفية عند التمرير */
+        }
+
+        .navbar {
+            background-color: #003366; /* لون خلفية شريط التنقل */
+            border: 3px solid #FFF2F2; /* حافة حول الشريط الرئيسي */
+            border-radius: 30px; /* تجعله دائري من الأطراف */
+            padding: 10px 30px; /* مسافة داخلية من الأعلى والأسفل واليمين واليسار */
+            margin: 20px auto; /* إضافة هامش من أعلى وتوسيط الشريط */
+            width: 90%; /* عرض الشريط 90% من حجم الصفحة */
+            display: flex; /* ترتيب عناصر الشريط بشكل مرن */
+            align-items: center; /* توسيط العناصر رأسياً */
+            justify-content: space-between; /* ترك مسافات بين عناصر الشريط */
+        }
+
+        .logo {
+            display: flex; /* ترتيب عناصر اللوجو بجانب بعض */
+            align-items: center; /* توسيط عناصر اللوجو رأسياً */
+            gap: 10px; /* فراغ بين أيقونة اللوجو والنص */
+            font-weight: bold; /* جعل الخط عريض */
+            color: #fff; /* لون النص أبيض */
+        }
+
+            .logo img {
+                width: 40px; /* عرض صورة اللوجو */
+                height: 40px; /* ارتفاع صورة اللوجو */
+                transform: scale(1.5); /* تكبير اللوجو بنسبة 1.5 */
+                border-radius: 50%; /* جعل الصورة دائرية */
+                margin-left: 160%; /* تحريك الصورة يمين */
+            }
+
+            .logo .highlight {
+                color: #d0d0ff; /* لون مميز لجزء معين من اللوجو */
+            }
+
+        .nav-links {
+            list-style: none; /* إزالة النقاط الإفتراضية للقائمة */
+            display: flex; /* جعل الروابط بجانب بعض بشكل مرن */
+            gap: 25px; /* مسافة بين الروابط */
+            margin: 0; /* إزالة الهامش العلوي والسفلي */
+            padding-right: 35%; /* مسافة الى اليمين */
+        }
+
+            .nav-links a {
+                color: #ffffff; /* لون روابط التنقل أبيض */
+                cursor: pointer; /* ظهور مؤشر اليد على الروابط */
+                transition: 0.3s; /* تحريك التغيير عند التفاعل */
+                padding: 6px 16px; /* مسافات داخلية للروابط */
+                border-radius: 20px; /* زوايا دائرية */
+                font-family: "Tagesschrift", system-ui; /* نوع خط للروابط */
+                font-size: 1.2rem; /* حجم الخط */
+                text-decoration: none; /* إزالة الخط السفلي */
+            }
+
+        /* Login Card */
+        .login-section {
+            display: flex; /* ترتيب كروت الدخول بجانب بعض إذا كان فيه أكثر من كارت */
+            justify-content: center; /* توسيط عنصر الكارت افقيًا */
+            align-items: center; /* توسيط محتوى الدخول عموديًا */
+            min-height: 73vh; /* الحد الأدنى لارتفاع قسم الدخول */
+            margin: 48px 0 0 0; /* مسافة من الأعلى فقط */
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.4); /* لون شفاف لكارت الدخول */
+            border-radius: 40px; /* كارت دائري من الجوانب */
+            padding: 46px 42px 46px 42px; /* حشو داخلي للكارت */
+            min-width: 375px; /* أصغر عرض للكارت */
+            max-width: 410px; /* أكبر عرض للكارت */
+            color: #fff; /* لون نص الكارت أبيض (النصوص الأساسية) */
+            box-shadow: 0 8px 32px #7ea1ce22; /* ظل للكارت */
+            position: relative; /* جعل الكارت بالنسبة للموضع الحالي */
+            overflow: hidden; /* إخفاء أي عناصر تخرج من الكارت */
+            margin-bottom: 44px; /* مسافة أسفل الكارت */
+        }
+
+            .login-card h2 {
+                color: #2a5782; /* لون نص العنوان */
+                text-align: center; /* العنوان في المنتصف */
+                font-size: 2.1rem; /* حجم عنوان كبير */
+                font-weight: 700; /* عنوان عريض */
+                margin-bottom: 18px; /* مسافة أسفل العنوان */
+            }
+
+            .login-card p {
+                text-align: center; /* جعل الفقرة في المنتصف */
+                margin-bottom: 22px; /* مسافة أسفل الفقرة */
+                color: #2a5782; /* لون النص */
+                font-size: 1.11rem; /* حجم نص متوسط */
+                font-weight: bold; /* نص عريض */
+            }
+
+        .login-form {
+            display: flex; /* ترتيب عمودي للفورم */
+            flex-direction: column; /* ترتيب العناصر داخل الفورم فوق بعض */
+            gap: 22px; /* مسافة بين كل عنصر في الفورم */
+        }
+
+        .login-label {
+            font-size: 0.99em; /* حجم خط اسم الحقل */
+            color: #2a5782; /* لون اسم الحقل */
+            font-weight: 600; /* خط عريض */
+            margin-bottom: 5px; /* مسافة أسفل اسم الحقل */
+            margin-left: 4px; /* مسافة من اليسار */
+        }
+
+        .login-input-row {
+            display: flex; /* ترتيب الأيقونة وحقل الإدخال بجانب بعض */
+            align-items: center; /* توسيط الأيقونة والحقل رأسيًا */
+            position: relative; /* يسمح بتموضع أيقونة العين بشكل مطلق */
+            margin-bottom: 0; /* إزالة المسافة أسفل البلوك */
+        }
+
+        .login-input-icon {
+            font-size: 1.15em; /* حجم أيقونة الإدخال */
+            background: var(--secondary); /* خلفية للأيقونة */
+            color: var(--deep-blue); /* لون الأيقونة نفسها */
+            border-radius: 25px 0 0 25px; /* أطراف دائرية من اليسار */
+            padding: 0 16px; /* حشو للأيقونة يمين ويسار */
+            height: 46px; /* ارتفاع العنصر */
+            display: flex; /* ترتيب داخلي للأيقونة */
+            align-items: center; /* توسيط الأيقونة رأسياً */
+            border: none; /* إزالة الحدود */
+            border-right: 1.5px solid #7ea1ce44; /* حدود رفيعة يمين الأيقونة */
+        }
+
+        .login-input {
+            border: none; /* إزالة الحدود الافتراضية */
+            background: white; /* لون خلفية الإدخال */
+            border-radius: 0 25px 25px 0; /* دائرية من اليمين فقط */
+            padding: 13px 48px 13px 20px; /* حشو للنص من جميع الجهات */
+            font-size: 1rem; /* حجم الخط */
+            width: 100%; /* يحتل عرض الكارد بالكامل */
+            color: var(--text); /* لون خط الإدخال */
+            outline: none; /* إزالة الحدود الزرقاء من المتصفح عند التحديد */
+            font-family: inherit; /* استخدام نفس خط الصفحة */
+            box-sizing: border-box; /* احتواء الهامش والحشو ضمن الحجم */
+            height: 46px; /* ارتفاع ثابت */
+            transition: background 0.1s; /* انتقال ناعم للخلفية عند التركيز */
+        }
+
+            .login-input:focus {
+                background: #e6f0fa; /* لون خاص لحقل الإدخال عند الضغط عليه */
+            }
+        /* Fix for Password Eye Icon */
+        .login-pw-wrap {
+            position: relative; /* يسمح بوضع أيقونة العين فوق الحقل */
+            width: 100%; /* كامل عرض الصف */
+            display: flex; /* ترتيب العناصر أفقيًا */
+            align-items: center; /* توسيط العناصر رأسياً */
+        }
+
+        .login-eye-icon {
+            position: absolute; /* تثبيت مكان الأيقونة فوق حقل الباسورد مباشرة */
+            right: 18px; /* تبعد عن الطرف الأيمن */
+            top: 50%; /* منتصف الصف رأسياً */
+            transform: translateY(-50%); /* تصحيح مكانها للمنتصف بالضبط */
+            font-size: 1.15em; /* حجم الأيقونة */
+            color: #233d55; /* لون الأيقونة */
+            background: transparent; /* بدون خلفية */
+            border: none; /* بدون حدود */
+            cursor: pointer; /* تظهر كزر قابل للنقر */
+            opacity: 0.77; /* شفاف بعض الشيء */
+            z-index: 2; /* تظهر فوق العناصر الأخرى */
+            padding: 0;
+            margin: 0;
+            height: 22px; /* ارتفاع الأيقونة */
+            width: 27px; /* عرض الأيقونة */
+            display: flex; /* ترتيب داخلي */
+            align-items: center; /* توسيط */
+            justify-content: center; /* توسيط */
+        }
+
+        .login-btn-main {
+            width: 100%; /* زر الدخول يعرض الكارت بالكامل */
+            margin: 10px 0 6px 0; /* مسافات حول الزر */
+            padding: 15px 0; /* ارتفاع الزر */
+            border-radius: 32px; /* زر دائري */
+            font-size: 1.11rem; /* حجم النص بالزر */
+            border: none; /* إزالة الحدود */
+            cursor: pointer; /* مؤشر اليد عند المرور */
+            font-family: inherit; /* نفس خط الصفحة */
+            font-weight: 700; /* نص الزر عريض */
+            background: var(--deep-blue); /* لون الخلفية */
+            color: #fff; /* لون النص أبيض */
+            transition: background 0.16s; /* انتقال ناعم لتغير اللون عند التفاعل */
+        }
+
+            .login-btn-main:hover {
+                background: #13335a; /* تغيير لون الزر عند المرور عليه */
+            }
+
+        .login-forgot, .login-register {
+            color: #13335a; /* لون روابط "نسيت كلمة المرور" و"التسجيل جديد" */
+            text-decoration: none; /* إزالة الخط السفلي */
+            font-size: 0.99em; /* حجم الخط */
+            transition: color 0.18s; /* انتقال عند تغيير اللون */
+        }
+
+            .login-forgot:hover, .login-register:hover {
+                color: #214d79; /* لون مختلف عند المرور على الرابط */
+            }
+
+        .text-danger, .validation-summary-errors, .field-validation-error {
+            color: #dc3545 !important; /* لون أحمر للتنبيهات والأخطاء */
+            font-size: 0.96em; /* حجم الخط للأخطاء */
+            background: transparent !important; /* بدون خلفية */
+        }
+
+        .alert-success {
+            background-color: #aef1ae; /* خلفية خضراء للتنبيه بالنجاح */
+            color: #185518; /* لون نص التنبيه ناجح */
+            border-radius: 15px; /* تنبيه دائري */
+            padding: 0.6em 1em; /* حشوة داخل التنبيه */
+            margin-bottom: 10px; /* المسافة من أسفل */
+            text-align: center; /* النص في المنتصف */
+            font-size: 1.04em; /* حجم الخط */
+        }
+
+        .alert-danger {
+            background-color: #fad2d2; /* خلفية حمراء للتنبيه بالخطأ */
+            color: #d21414; /* لون نص التنبيه خطأ */
+            border-radius: 15px; /* تنبيه دائري */
+            padding: 0.6em 1em; /* حشوة داخل التنبيه */
+            margin-top: 0.9em; /* مسافة من الأعلى */
+            text-align: center; /* النص في المنتصف */
+            font-size: 1.04em; /* حجم الخط */
+        }
+
+        /* --- Footer Section (copied from original for completeness) --- */
+        .footer {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* تدرج لوني كخلفية للفوتر */
+            color: white; /* لون النص أبيض */
+            padding: 2rem 0; /* حشوة من الأعلى والأسفل */
+            position: relative; /* يسمح بالتحكم في مواقع العناصر بداخله */
+            overflow: hidden; /* إخفاء أي عناصر تخرج خارج الفوتر */
+        }
+
+            .footer::before {
+                content: ''; /* عنصر زينة مرئي فقط */
+                position: absolute; /* تثبيت مكان العنصر قبل كل محتوى الفوتر */
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%); /* تدرج شفاف للزينة */
+                pointer-events: none; /* عدم تأثر المستخدم بمحتواه */
+            }
+
+        .footer-container {
+            max-width: 1200px; /* أعرض حد للفوتر */
+            margin: 0 auto; /* توسيط القسم بالصفحة */
+            padding: 0 2rem; /* حشوة جانبية */
+            position: relative; /* لتخزين العناصر relative بداخلها */
+            z-index: 2; /* جعل العناصر فوق ::before */
+        }
+
+        .footer-main {
+            display: flex; /* ترتيب العناصر بشكل مرن */
+            flex-direction: column; /* ترتيبهم عموديًا */
+            gap: 2rem; /* مسافة بين أجزاء الفوتر الرئيسية */
+            margin-bottom: 2rem; /* مسافة أسفل الجزء الرئيسي */
+        }
+
+        .footer-top {
+            display: flex; /* توزيع الأجزاء الأفقي */
+            justify-content: space-between; /* مباعدة بين العناصر الرئيسية */
+            align-items: center; /* توسيط رأسياً */
+            flex-wrap: wrap; /* السماح بالنزول لسطر جديد إذا كان العرض صغير */
+            gap: 2rem; /* فراغات بينهم */
+        }
+
+        .logo-section { /* لوجو البنك داخل الفوتر */
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .flogo {
+            background: rgba(255, 255, 255, 0.2); /* خلفية شفافة لشكل اللوجو */
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .bank-name {
+            font-size: 2rem; /* حجم اسم البنك */
+            font-weight: 300; /* وزن الخط خفيف */
+            letter-spacing: 1px; /* تباعد بين الحروف */
+        }
+
+        .contact-info {
+            display: flex; /* توزيع عناصر معلومات التواصل جنب بعض */
+            gap: 2rem; /* الفراغات بينهم */
+            align-items: center; /* توسيط رأسياً */
+            flex-wrap: wrap; /* يسمح لهم بالنزول في سطر جديد */
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(5px); /* ضبابية لخلفية العنصر */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease; /* انتقال سلس عند التفاعل */
+        }
+
+            .contact-item:hover {
+                background: rgba(255, 255, 255, 0.2); /* يغير لون الخلفية عند تحريك الماوس */
+                transform: translateY(-2px); /* رفع العنصر قليلاً */
+            }
+
+        .contact-icon {
+            width: 20px; /* عرض أيقونة التواصل */
+            height: 20px;
+            opacity: 0.8; /* خفوت الأيقونة قليلا */
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2); /* شريط رفيع فوق هذا القسم */
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright {
+            font-size: 0.9rem; /* حجم النص للحقوق */
+            opacity: 0.8; /* جعله أفتح من باقي النصوص */
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid transparent;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .footer-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .divider {
+            width: 1px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+    </style> <!-- نهاية جميع التنسيقات الخاصة بالصفحة -->
+</head>
+<header>
+    <nav class="navbar">
+        <!-- بداية شريط التنقل الرئيسي في أعلى الصفحة -->
+        <div class="logo">
+            <img src="/img/nav.jpg" alt="Logo" /> <!-- صورة اللوجو في الشريط -->
+        </div>
+        <ul class="nav-links">
+            <a href="/Home/Index">Home</a> <!-- رابط لصفحة الهوم -->
+            <a href="/Home/Careers">Careers</a> <!-- رابط الوظائف -->
+            <a href="/Home/About">About</a> <!-- رابط معلومات عن البنك -->
+            <a href="/Home/Security">Security</a> <!-- رابط الحماية -->
+        </ul>
+    </nav>
+</header>
+
+<body>
+    <!-- Header -->
+    <!-- Main Login Card -->
+    <div class="login-section">
+        <div class="login-card">
+            <h2>Welcome Back</h2> <!-- عنوان ترحيبي في واجهة الدخول -->
+            <p>Sign in to securely access your Nexus Bank account.</p> <!-- ملاحظة اختيارية للمستخدم -->
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert-success">@TempData["SuccessMessage"]</div>
+                // إذا هناك رسالة نجاح من العمليات (زي إعادة تعيين كلمة المرور)، تظهر للمستخدم
+            }
+
+            <form asp-action="Login" method="post" class="login-form">
+                <!-- فورم الدخول، ترسل البيانات للاكشن Login -->
+                <div>
+                    <label class="login-label" for="username">Username</label> <!-- عنوان حقل اسم المستخدم -->
+                    <div class="login-input-row">
+                        <span class="login-input-icon"><i class="fa fa-user"></i></span> <!-- أيقونة مستخدم بداخل الحقل -->
+                        <input id="username" name="username" class="login-input" required placeholder="Enter your username" autocomplete="username" /> <!-- حقل اسم المستخدم، يجب تعبئته -->
+                    </div>
+                </div>
+                <div>
+                    <label class="login-label" for="password">Password</label> <!-- عنوان حقل كلمة المرور -->
+                    <div class="login-input-row login-pw-wrap">
+                        <span class="login-input-icon"><i class="fa fa-lock"></i></span> <!-- أيقونة قفل في الحقل -->
+                        <input id="password" name="password" type="password" class="login-input" required placeholder="Enter your password" autocomplete="current-password" /> <!-- حقل إدخال كلمة المرور، نص مخفي -->
+                        <button id="togglePasswordBtn" class="login-eye-icon" type="button" tabindex="-1">
+                            <i class="fa fa-eye"></i> <!-- أيقونة العين لتبديل إظهار أو إخفاء الباسورد -->
+                        </button>
+                    </div>
+                </div>
+                <div style="display:flex; justify-content:flex-end; margin-top:2px;">
+                    <a asp-action="ResetPassword" class="login-forgot">reset password?</a> <!-- زر رابط "نسيت كلمة المرور" يذهب لصفحة إعادة التعيين -->
+                </div>
+                <button type="submit" class="login-btn-main">Login</button> <!-- زر إرسال بيانات الدخول -->
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert-danger">@ViewBag.ErrorMessage</div>
+                    // إذا كان هناك رسالة خطأ مثل كلمة سر خاطئة، تظهر للمستخدم
+                }
+                <div style="margin-top: 14px; text-align: center;">
+                    <span style="color:#285686;">Don't have an account?</span>
+                    <a asp-action="Register" class="login-register">Register now</a> <!-- رابط للتسجيل بحساب جديد -->
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- تم حذف قسم Testimonials بالكامل بناءً على طلبك -->
+    <!-- Footer Section -->
+    <footer class="footer">
+        <!-- بداية الفوتر أسفل الصفحة -->
+        <div class="footer-container">
+            <!-- وعاء للتحكم بحجم ومحتوى الفوتر -->
+            <div class="footer-main">
+                <!-- القسم الرئيسي للفوتر -->
+                <div class="footer-top">
+                    <!-- أعلى الفوتر (لوجو + معلومات تواصل) -->
+                    <div class="logo-section">
+                        <div class="flogo">NB</div> <!-- دائرة تحمل اختصار البنك كنص -->
+                        <h2 class="bank-name">Nexus Bank</h2> <!-- اسم البنك -->
+                    </div>
+                    <div class="contact-info">
+                        <!-- أرقام التواصل والبريد -->
+                        <div class="contact-item">
+                            <!-- عنصر إيميل البنك -->
+                            <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <!-- أيقونة إيميل متجهية -->
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                            <span>Nexus@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <!-- عنصر رقم الهاتف -->
+                            <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <!-- أيقونة هاتف متجهية -->
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                            </svg>
+                            <span>+20 1300000000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <!-- نهاية الفوتر (الحقوق والروابط) -->
+                <div class="copyright">
+                    © 2025 Bank All Rights Reserved <!-- حقوق الملكية للبنك -->
+                </div>
+                <div class="footer-links">
+                    <a href="/Home/Privacy">Privacy</a> <!-- رابط سياسة الخصوصية -->
+                    <div class="divider"></div>
+                    <a href="/Home/Terms">Terms of Service</a> <!-- رابط شروط الخدمة -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- script -->
+    <script>
+        // دالة لتبديل إظهار/إخفاء كلمة السر عند النقر على زر العين
+        function toggleLoginPassword(event) {
+            var input = document.getElementById("password"); // جلب حقل كلمة المرور حسب الـ ID
+            var eye = event.currentTarget.querySelector('i'); // جلب أيقونة العين بداخل الزر
+            if (input.type === "password") { // إذا الحقل في وضع الإخفاء
+                input.type = "text"; // اجعله نص ظاهر
+                eye.classList.remove('fa-eye'); // استبدل الأيقونة بالعين المفتوحة
+                eye.classList.add('fa-eye-slash');
+            } else { // إذا كان نص ظاهر
+                input.type = "password"; // اخفي النص مرة أخرى
+                eye.classList.remove('fa-eye-slash');
+                eye.classList.add('fa-eye');
+            }
+        }
+
+        // ربط زر العين بدالة التبديل
+        document.getElementById('togglePasswordBtn').addEventListener('click', toggleLoginPassword);
+
+        // انتهت كل الدوال والمنطق البرمجي للمميزات الديناميكية في الصفحة
+    </script>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial"); // تضمين سكريبتات jQuery والفاليديشن حتى تعمل تحقق البيانات في النماذج بشكل ديناميكي (أوتوماتيكي)
+        }
+    }
+</body> <!-- نهاية منطقة البودي وبها كل العناصر التي تظهر للمستخدم -->
+</html> <!-- نهاية ملف الصفحة -->
